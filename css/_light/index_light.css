@@ -976,6 +976,9 @@ div.bbc_footnotes .meaction{
 	border: 1px solid #cfcfcf;
 	background: #fff;
 }
+.board_row.alternating_row, .childboard_row.alternating_row {
+        background: #cfd6e1;
+}
 .forumposts .windowbg, .forumposts .windowbg2 {
 	margin-top: 2px;
 }

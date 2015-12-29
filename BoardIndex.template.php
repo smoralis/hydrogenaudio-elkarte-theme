@@ -28,7 +28,9 @@ function template_BoardIndex_init()
  */
 function template_boards_list()
 {
-	global $context, $txt;
+	global $context, $txt, $theme_bi_alternating_row;
+
+	$theme_bi_alternating_row = 0;
 
 	// Each category in categories is made up of:
 	// id, href, link, name, is_collapsed (is it collapsed?), can_collapse (is it okay if it is?),
