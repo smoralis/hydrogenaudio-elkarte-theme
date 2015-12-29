@@ -1216,7 +1216,7 @@ JumpTo.prototype.fillSelect = function (aBoardsAndCategories)
 
 		if (!this.opt.bNoRedirect)
 		{
-			oOption.value = aBoardsAndCategories[i].isCategory ? '#c' + aBoardsAndCategories[i].id : '?board=' + aBoardsAndCategories[i].id + '.0';
+			oOption.value = aBoardsAndCategories[i].isCategory ? '?action=forum#c' + aBoardsAndCategories[i].id : '?board=' + aBoardsAndCategories[i].id + '.0';
 		}
 		else
 		{
