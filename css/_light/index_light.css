@@ -981,6 +981,9 @@ div.bbc_footnotes .meaction{
 	background: #cfd6e1;
 }
 .forumposts .windowbg, .forumposts .windowbg2 {
+	margin-top: 10px;
+}
+.forumposts .firstpost {
 	margin-top: 2px;
 }
 .board_row.parent_board {
