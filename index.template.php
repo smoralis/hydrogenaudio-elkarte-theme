@@ -226,25 +226,29 @@ function template_body_above()
 	// Skip nav link.
 	echo '
 	<div id="top_section">
-		<div class="wrapper">';
+		<div id="header" class="wrapper">
+			<span class="', !empty($settings['header_layout']) ? ($settings['header_layout'] == 1 ? ' centerheader' : ' rightheader') : '', '"', empty($context['minmax_preferences']['upshrink']) ? '' : ' style="display: none;" aria-hidden="true"', '>
+				<h1 id="forumtitle">
+					<a class="forumlink" href="', $scripturl, '">', $context['forum_name'], '</a>';
+
+	echo '
+					<span id="logobox">
+						<a href="', $scripturl, '">
+							<img id="logo" src="', $context['header_logo_url_html_safe'], '" srcset="/logo.png 1x, /logo@2x.png 2x, /logo@3x.png 3x" alt="', $context['forum_name_html_safe'], '" title="', $context['forum_name_html_safe'], '" />', empty($settings['site_slogan']) ? '' : '
+							<span id="siteslogan">' . $settings['site_slogan'] . '</span>', '
+						</a>
+					</span>
+				</h1>';
+
+	// Show the menu here, according to the menu sub template.
+	echo '
+			</span>
+			<span>';
 
 	call_template_callbacks('th', $context['theme_header_callbacks']);
 
 	echo '
-		</div>
-		<div id="header" class="wrapper', !empty($settings['header_layout']) ? ($settings['header_layout'] == 1 ? ' centerheader' : ' rightheader') : '', '"', empty($context['minmax_preferences']['upshrink']) ? '' : ' style="display: none;" aria-hidden="true"', '>
-			<h1 id="forumtitle">
-				<a class="forumlink" href="', $scripturl, '">', $context['forum_name'], '</a>';
-
-	echo '
-				<span id="logobox">
-					<img id="logo" src="', $context['header_logo_url_html_safe'], '" alt="', $context['forum_name_html_safe'], '" title="', $context['forum_name_html_safe'], '" />', empty($settings['site_slogan']) ? '' : '
-					<span id="siteslogan">' . $settings['site_slogan'] . '</span>', '
-				</span>
-			</h1>';
-
-	// Show the menu here, according to the menu sub template.
-	echo '
+			</span>
 		</div>';
 
 	// WAI-ARIA a11y tweaks have been applied here.
