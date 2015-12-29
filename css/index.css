@@ -54,7 +54,7 @@
 	/* Next limits maximum width on wide screens. */
 	/* Sized in em, since some people require larger text. */
 	/* For ease of reading, content really should not be too wide. */
-	max-width: 90em;
+	/*max-width: 90em;*/
 	/* Next is just for some testing. */
 	/*min-width: 100%;*/
 }
