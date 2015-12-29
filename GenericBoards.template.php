@@ -90,7 +90,7 @@ function optimizeBoardsSubdivision($categories, $total_boards)
  */
 function template_list_boards($boards, $id)
 {
-	global $context, $settings, $txt, $scripturl;
+	global $context, $settings, $txt, $scripturl, $theme_bi_alternating_row;
 
 	echo '
 			<ul class="category_boards" id="', $id, '">';
@@ -102,7 +102,7 @@ function template_list_boards($boards, $id)
 	foreach ($boards as $board)
 	{
 		echo '
-				<li class="board_row', (!empty($board['children'])) ? ' parent_board' : '', $board['is_redirect'] ? ' board_row_redirect' : '', '" id="board_', $board['id'], '">
+				<li class="board_row', (!empty($board['children'])) ? ' parent_board' : '', $board['is_redirect'] ? ' board_row_redirect' : '', $theme_bi_alternating_row ? ' alternating_row' : '', '" id="board_', $board['id'], '">
 					<div class="board_info">
 						<a class="icon_anchor" href="', ($board['is_redirect'] || $context['user']['is_guest'] ? $board['href'] : $scripturl . '?action=unread;board=' . $board['id'] . '.0;children'), '">';
 
@@ -195,7 +195,7 @@ function template_list_boards($boards, $id)
 			// Use h4 tag here for better a11y. Use <ul> for list of sub-boards.
 			// Having sub-board links in <li>'s will allow "tidy sub-boards" via easy CSS tweaks. ;)
 			echo '
-				<li class="childboard_row" id="board_', $board['id'], '_children">
+				<li class="childboard_row', $theme_bi_alternating_row ? ' alternating_row' : '', '" id="board_', $board['id'], '_children">
 					<ul class="childboards">
 						<li>
 							<h4>', $txt['parent_boards'], ':</h4>
@@ -206,6 +206,8 @@ function template_list_boards($boards, $id)
 					</ul>
 				</li>';
 		}
+
+		$theme_bi_alternating_row = $theme_bi_alternating_row ? 0 : 1;
 	}
 
 	echo '
