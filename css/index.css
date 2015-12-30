@@ -4362,34 +4362,24 @@ dl.no_members {
 }
 /* This one does 540 and smaller screens at default font size. */
 @media screen and (max-width: 33.750em) {
-
 	.sp_recent td {
 		display: inline;
 	}
-
 	.sp_recent_info.righttext {
 		margin-left:-1px;
 		text-align: left;
 		display: block;
 		padding-right: 10px !important;
 	}
-
-	
 	.sp_recent_info.righttext  .sp_recent_label {
 		padding-right: 5px;
 	}
-
-
 	.sp_recent_info.righttext a {
 		float: left !important;
-
 	}
-
-
 	.sp_recent_info.righttext>a:before {
 		content: "Latest post by "
 	}
-
 	select, .input_text, .input_password {
 		max-width: 12em;
 	}
