@@ -110,8 +110,11 @@ tr.sp_recent:nth-child(even) {
 .sp_recent_subject {
 	width: 60%;
 }
+.sp_recent_label {
+	float: left;
+}
 .sp_recent_info {
-	width: 35%;
+	width: 30em;
 }
 .sp_image {
 	text-align: center;
