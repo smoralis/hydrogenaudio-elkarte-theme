@@ -1096,6 +1096,10 @@ div.bbc_footnotes .meaction{
 .locked_row, .locked_row.core_posts {
 	background: #f7f7f7;
 }
+.sticky_row:nth-child(even), .locked_row:nth-child(even) {
+	background: #ffffef;
+}
+
 #topic_icons {
 	border: 1px solid #ddd;
 	border-radius: 3px;
