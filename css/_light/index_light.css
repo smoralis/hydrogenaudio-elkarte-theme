@@ -1245,10 +1245,6 @@ div.bbc_footnotes .meaction{
 	background: #fff5cd;
 }
 
-.forumposts .poster {
-	background: #e1e3ef;
-}
-
 /* @todo - Add an h3 for a11y? Breaks Stoopidfish. Bleh. :P */
 .poster .name {
 	color: #3c6582;
