@@ -248,14 +248,14 @@ strong {
 
 /* Custom highlighted text style for modern browsers. */
 /* Nicer than default blue. Needs two separate rules. */
-::-moz-selection {
+/*::-moz-selection {
 	background: #d9e5ff;
 	color: #000;
 }
 ::selection {
 	background: #d9e5ff;
 	color: #000;
-}
+}*/
 
 /* Other highlighted text, such as search results. */
 .highlight {
