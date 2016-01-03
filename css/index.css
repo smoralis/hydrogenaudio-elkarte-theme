@@ -4483,7 +4483,7 @@ dl.no_members {
 		margin: 0;
 	}
 	#forumposts .windowbg {
-		padding: 5px;
+		padding: 0;
 	}
 	#forumposts h2 img {
 		display: none;
@@ -4627,9 +4627,10 @@ dl.no_members {
 		text-overflow: clip;
 	}
 	.poster .listlevel1 {
-		float: left;
-		display: inline-block;
-	}
+        float: left;
+        display: inline-block;
+        margin: 0 0.5em 1em;
+    }
 	.poster li.membergroup {
 		display: none;
 	}
