@@ -100,12 +100,15 @@ hr {
 .sp_staff_divider {
 	border-bottom: 1px dashed #AAA;
 }
-tr.sp_recent:nth-child(even) {
+tr.sp_recent:nth-child(odd) {
 	background: #eff1f3;
 }
 .sp_recent_icon {
 	vertical-align: middle;
 	width: 5%;
+}
+.sp_recent_header {
+	background: #ced7e5;
 }
 .sp_recent_subject {
 	width: 60%;
@@ -114,7 +117,10 @@ tr.sp_recent:nth-child(even) {
 	float: left;
 }
 .sp_recent_info {
-	width: 30em;
+	width: 16em;
+}
+.sp_recent_poster {
+	width: 40em;
 }
 .sp_image {
 	text-align: center;
