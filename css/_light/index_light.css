@@ -1225,24 +1225,31 @@ div.bbc_footnotes .meaction{
 	box-shadow: 1px 2px 4px #eee;
 }
 /* Poster and postarea + moderation area underneath */
-.forumposts .windowbg, .forumposts .windowbg2,
-.forumposts .approvebg, .forumposts .approvebg2, .core_posts {
-	border: 1px solid #ddd;
-	border-bottom: 1px solid #ccc;
-	background: #f0f0f0;
+
+/* Color for left-of-post user details full-height background */
+.forumposts .windowbg,
+.forumposts .windowbg2,
+.forumposts .approvebg,
+.forumposts .approvebg2 {
+    background-color: #e7eaef;
+    padding: 0;
+}
+.forumposts .windowbg .postarea, .forumposts .windowbg2 .postarea,
+.forumposts .approvebg .postarea, .forumposts .approvebg2 .postarea, .core_posts {
+    background: #f0f0f0;
 }
 
-.forumposts .windowbg, .forumposts .approvebg {
-	background: #f0f0f0;
+.forumposts .windowbg .postarea, .forumposts .approvebg .postarea {
+    background: #f0f0f0;
 }
 
-.forumposts .windowbg2, .forumposts .approvebg2 {
-	background: #eff1f3;
+.forumposts .windowbg2 .postarea, .forumposts .approvebg2 .postarea {
+    background: #eff1f3;
 }
 
 /* Colors for background of posts requiring approval */
-.forumposts .approvebg, .forumposts .approvebg2 {
-	background: #fff5cd;
+.forumposts .approvebg .postare, .forumposts .approvebg2 .postarea {
+    background: #fff5cd;
 }
 
 /* @todo - Add an h3 for a11y? Breaks Stoopidfish. Bleh. :P */

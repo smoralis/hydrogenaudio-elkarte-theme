@@ -2181,6 +2181,7 @@ div.core_posts {
 	-moz-hyphens: auto;
 	-ms-hyphens: auto;
 	font-size: 0.857em;
+	margin-top: 1em;
 }
 .poster.poster2 {
 	display: block;
@@ -2289,12 +2290,12 @@ div.core_posts {
 .postarea {
 	display: block;
 	margin: 0 0 0 13em;
-	padding: 0 1em 0 1.5em;
+	padding: 1em 1em 1em 1.5em;
 	max-width: 100%;
 }
 .postarea2 {
 	display: block;
-	padding: 0 1em;
+	padding: 1em 1em;
 }
 
 #topic_summary .postarea2 {
