@@ -822,8 +822,47 @@ dl.sp_form img, #sp_add_articles_list_header img {
 	#sp_collapse_side1, #sp_collapse_side2, #sp_collapse_side3, #sp_collapse_side4 {
 		padding: 6px;
 	}
+	.sp_recent_header {
+		display: none;
+	}
 	.sp_recent td {
 		display: inline;
+		white-space: pre-line
+	}
+	.sp_recent_subject:before {
+		font-weight: bold;
+		content: "Forum"
+	}
+	.sp_recent_board:before {
+		font-weight: bold;
+		content: "Forum"
+	}
+	.sp_recent_starter:before {
+		font-weight: bold;
+		content: "Topic Starter"
+	}
+	.sp_recent_starter:after {
+		font-weight: bold;
+		content: "Replies"
+	}
+	.sp_recent_poster:before {
+		font-weight: bold;
+		content: "Last post "
+	}
+	.sp_recent_info.righttext {
+		margin-left:-1px;
+		text-align: left;
+		display: block;
+		padding-right: 10px !important;
+	}
+	.sp_recent_info.righttext  .sp_recent_label {
+		padding-right: 5px;
+	}
+	.sp_recent_info.righttext a {
+		float: left !important;
+	}
+	.sp_recent_info.righttext>a:before {
+		content: "Latest post by "
 	}
 	.sp_recent_info.righttext {
 		margin-left:-1px;
