@@ -832,7 +832,7 @@ dl.sp_form img, #sp_add_articles_list_header img {
 	}
 	.sp_recent_subject:before {
 		font-weight: bold;
-		content: "Forum"
+		content: "Topic subject"
 	}
 	.sp_recent_board:before {
 		font-weight: bold;
@@ -840,7 +840,7 @@ dl.sp_form img, #sp_add_articles_list_header img {
 	}
 	.sp_recent_starter:before {
 		font-weight: bold;
-		content: "Topic Starter"
+		content: "Topic starter"
 	}
 	.sp_recent_starter:after {
 		font-weight: bold;
