@@ -1922,7 +1922,7 @@ div.bbc_footnotes .meaction{
 		background-position: -444px -14px;
 	 }
 	.forumposts .windowbg2 {
-		background-color: #eee;
+		background-color: none;
 	}
 	.forumposts .windowbg, .forumposts .windowbg2 {
 		border: 1px solid #bfbfbf;
