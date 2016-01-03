@@ -111,16 +111,17 @@ tr.sp_recent:nth-child(odd) {
 	background: #ced7e5;
 }
 .sp_recent_subject {
-	width: 60%;
+	width: 110em;
 }
 .sp_recent_label {
 	float: left;
 }
 .sp_recent_info {
 	width: 16em;
+	text-align: center;
 }
 .sp_recent_poster {
-	width: 40em;
+	width: 35em;
 }
 .sp_image {
 	text-align: center;
