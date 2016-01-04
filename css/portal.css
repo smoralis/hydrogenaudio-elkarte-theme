@@ -901,7 +901,7 @@ dl.sp_form img, #sp_add_articles_list_header img {
 		content: "Topic starter: "
 	}
 	.sp_recent_poster:before {
-		content: "Latest post by "
+		content: "Latest post by: "
 	}
 	.sp_recent_poster a {
 	  font-weight: normal;
@@ -919,7 +919,7 @@ dl.sp_form img, #sp_add_articles_list_header img {
 		float: left !important;
 	}
 	.sp_recent_info.righttext>a:before {
-		content: "Latest post by "
+		content: "Latest post by: "
 	}
 	.sp_recent_poster.righttext br {
 		display: none;
@@ -943,7 +943,7 @@ dl.sp_form img, #sp_add_articles_list_header img {
 	}
 	.sp_recent_subject:before {
 		font-weight: bold;
-		content: "Topic subject:"
+		content: "Topic subject: "
 	}
 	a[href$="#new"] {
 		margin-left: 0.25em;
@@ -954,7 +954,7 @@ dl.sp_form img, #sp_add_articles_list_header img {
 	}
 	.sp_recent_starter:before {
 		font-weight: bold;
-		content: "Topic starter:"
+		content: "Topic starter: "
 	}
 	.sp_recent_starter:after {
 		font-weight: bold;
@@ -962,7 +962,7 @@ dl.sp_form img, #sp_add_articles_list_header img {
 	}
 	.sp_recent_poster:before {
 		font-weight: bold;
-		content: "Latest post by"
+		content: "Latest post by: "
 	}
 	.sp_recent_info.righttext {
 		margin-left:-1px;
@@ -977,7 +977,7 @@ dl.sp_form img, #sp_add_articles_list_header img {
 		float: left !important;
 	}
 	.sp_recent_info.righttext a:before {
-		content: "Latest post by "
+		content: "Latest post by: "
 	}
 	.sp_recent_poster.righttext br {
 		display: none;
@@ -998,7 +998,7 @@ dl.sp_form img, #sp_add_articles_list_header img {
 		float: left !important;
 	}
 	.sp_recent_info.righttext>a:before {
-		content: "Latest post by "
+		content: "Latest post by: "
 	}
 	.sp_recent_poster time {
 		font-style:italic;
