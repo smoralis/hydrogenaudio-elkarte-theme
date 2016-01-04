@@ -799,6 +799,15 @@ dl.sp_form img, #sp_add_articles_list_header img {
 	overflow: auto;
 }
 
+.sp_recent_starter {
+	min-width: 7em;
+	text-align: center
+}
+.sp_recent_replies {
+	min-width: 3em;
+	text-align: center
+}
+
 /* Experimental media querys */
 /*---------------------------*/
 @media screen and (max-width: 32em)
@@ -810,6 +819,12 @@ dl.sp_form img, #sp_add_articles_list_header img {
 		left: 0;
 		width: 100% !important;
 		display: block;
+	}
+	a[href$="#new"] {
+		white-space: pre-line;
+	}
+	a[href$="#new"]:before {
+		content: "\A"
 	}
 	#sp_left {
 		left: 0;
@@ -881,3 +896,78 @@ dl.sp_form img, #sp_add_articles_list_header img {
 		content: "Latest post by "
 	}
 }
+
+
+@media screen and (min-width: 32em) and (max-width: 55em)
+{
+	
+	.sp_recent_header {
+		display: none;
+	}
+	.sp_recent td {
+		display: inline;
+	}
+	.sp_recent_subject:before {
+		font-weight: bold;
+		content: "Topic subject:"
+	}
+	a[href$="#new"] {
+		margin-left: 0.25em;
+	}
+	.sp_recent_board:before {
+		font-weight: bold;
+		content: "Forum: "
+	}
+	.sp_recent_starter:before {
+		font-weight: bold;
+		content: "Topic starter:"
+	}
+	.sp_recent_starter:after {
+		font-weight: bold;
+		content: "Replies:"
+	}
+	.sp_recent_poster:before {
+		font-weight: bold;
+		content: "Last post by:"
+	}
+	.sp_recent_info.righttext {
+		margin-left:-1px;
+		text-align: left;
+		display: block;
+		padding-right: 10px !important;
+	}
+	.sp_recent_info.righttext  .sp_recent_label {
+		padding-right: 5px;
+	}
+	.sp_recent_info.righttext a {
+		float: left !important;
+	}
+	.sp_recent_info.righttext a:before {
+		content: "Latest post by "
+	}
+	.sp_recent_poster.righttext br {
+		display: none;
+	}
+	.sp_recent_poster.righttext time:before {
+		content: " "
+	}
+	.sp_recent_info.righttext {
+		margin-left:-1px;
+		text-align: left;
+		display: block;
+		padding-right: 10px !important;
+	}
+	.sp_recent_info.righttext  .sp_recent_label {
+		padding-right: 5px;
+	}
+	.sp_recent_info.righttext a {
+		float: left !important;
+	}
+	.sp_recent_info.righttext>a:before {
+		content: "Latest post by "
+	}
+	.sp_recent_poster time {
+		font-style:italic;
+	}
+}
+
