@@ -58,7 +58,7 @@ function template_main()
 
 			// Any new replies?
 			if ($topic['new'])
-				echo '<a class="new_posts" href="', $topic['new_href'], '" id="newicon' . $topic['first_post']['id'] . '">' . $txt['new'] . '</a>';
+				echo '<a class="new_posts" href="', $topic['new_href'], '" id="newicon' . $topic['first_post']['id'] . '">' . $txt['new'] . '</a>&nbsp;';
 
 			// Show the board the topic was posted in, as well as a link to the profile of the topic starter
 			echo
