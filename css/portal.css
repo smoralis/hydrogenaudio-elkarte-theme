@@ -857,12 +857,6 @@ dl.sp_form img, #sp_add_articles_list_header img {
 		width: 100% !important;
 		display: block;
 	}
-	a[href$="#new"] {
-		white-space: pre-line;
-	}
-	a[href$="#new"]:before {
-		content: "\A"
-	}
 	#sp_left {
 		left: 0;
 		width: 100% !important;
@@ -874,6 +868,9 @@ dl.sp_form img, #sp_add_articles_list_header img {
 	}
 	#sp_collapse_side1, #sp_collapse_side2, #sp_collapse_side3, #sp_collapse_side4 {
 		padding: 6px;
+	}
+	.sp_recent_replies:before  {
+		content: "Replies: "
 	}
 }
 
@@ -895,23 +892,20 @@ dl.sp_form img, #sp_add_articles_list_header img {
 		font-weight: bold;
 	}
 	.sp_recent_subject:before {
-		content: "Topic subject"
+		content: "Topic subject: "
 	}
 	.sp_recent_board:before {
-		content: "Forum"
+		content: "Forum: "
 	}
 	.sp_recent_starter:before {
-		content: "Topic starter"
-	}
-	.sp_recent_replies:before {
-		content: "Replies"
+		content: "Topic starter: "
 	}
 	.sp_recent_poster:before {
-		content: "Last post "
+		content: "Latest post by: "
 	}
 	.sp_recent_poster a {
 	  font-weight: normal;
-  }
+  	}
 	.sp_recent_info.righttext {
 		margin-left:-1px;
 		text-align: left;
@@ -925,7 +919,7 @@ dl.sp_form img, #sp_add_articles_list_header img {
 		float: left !important;
 	}
 	.sp_recent_info.righttext>a:before {
-		content: "Latest post by "
+		content: "Latest post by: "
 	}
 	.sp_recent_poster.righttext br {
 		display: none;
@@ -949,7 +943,7 @@ dl.sp_form img, #sp_add_articles_list_header img {
 	}
 	.sp_recent_subject:before {
 		font-weight: bold;
-		content: "Topic subject:"
+		content: "Topic subject: "
 	}
 	a[href$="#new"] {
 		margin-left: 0.25em;
@@ -960,7 +954,7 @@ dl.sp_form img, #sp_add_articles_list_header img {
 	}
 	.sp_recent_starter:before {
 		font-weight: bold;
-		content: "Topic starter:"
+		content: "Topic starter: "
 	}
 	.sp_recent_starter:after {
 		font-weight: bold;
@@ -968,7 +962,7 @@ dl.sp_form img, #sp_add_articles_list_header img {
 	}
 	.sp_recent_poster:before {
 		font-weight: bold;
-		content: "Last post by:"
+		content: "Latest post by: "
 	}
 	.sp_recent_info.righttext {
 		margin-left:-1px;
@@ -983,7 +977,7 @@ dl.sp_form img, #sp_add_articles_list_header img {
 		float: left !important;
 	}
 	.sp_recent_info.righttext a:before {
-		content: "Latest post by "
+		content: "Latest post by: "
 	}
 	.sp_recent_poster.righttext br {
 		display: none;
@@ -1004,7 +998,7 @@ dl.sp_form img, #sp_add_articles_list_header img {
 		float: left !important;
 	}
 	.sp_recent_info.righttext>a:before {
-		content: "Latest post by "
+		content: "Latest post by: "
 	}
 	.sp_recent_poster time {
 		font-style:italic;
