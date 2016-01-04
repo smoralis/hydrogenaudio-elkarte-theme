@@ -857,12 +857,6 @@ dl.sp_form img, #sp_add_articles_list_header img {
 		width: 100% !important;
 		display: block;
 	}
-	a[href$="#new"] {
-		white-space: pre-line;
-	}
-	a[href$="#new"]:before {
-		content: "\A"
-	}
 	#sp_left {
 		left: 0;
 		width: 100% !important;
@@ -895,23 +889,23 @@ dl.sp_form img, #sp_add_articles_list_header img {
 		font-weight: bold;
 	}
 	.sp_recent_subject:before {
-		content: "Topic subject"
+		content: "Topic subject: "
 	}
 	.sp_recent_board:before {
-		content: "Forum"
+		content: "Forum: "
 	}
 	.sp_recent_starter:before {
-		content: "Topic starter"
+		content: "Topic starter: "
 	}
-	.sp_recent_replies:before {
-		content: "Replies"
+	.sp_recent_replies:after {
+		content: "replies "
 	}
 	.sp_recent_poster:before {
-		content: "Last post "
+		content: "Lates post by "
 	}
 	.sp_recent_poster a {
 	  font-weight: normal;
-  }
+  	}
 	.sp_recent_info.righttext {
 		margin-left:-1px;
 		text-align: left;
@@ -968,7 +962,7 @@ dl.sp_form img, #sp_add_articles_list_header img {
 	}
 	.sp_recent_poster:before {
 		font-weight: bold;
-		content: "Last post by:"
+		content: "Latest post by"
 	}
 	.sp_recent_info.righttext {
 		margin-left:-1px;
