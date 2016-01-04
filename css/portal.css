@@ -143,9 +143,9 @@ tr.sp_recent:nth-child(even) {
 	text-align: center;
 }
 .sp_recent_poster {
-	min-width: 18em;
-	max-width: 18em;
 	text-align: left;
+	white-space: nowrap;
+	min-width: 8em;
 }
 .sp_recent_poster a {
 	font-weight: bold;
