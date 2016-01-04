@@ -16,6 +16,9 @@ hr {
 	border-spacing: 0;
 	width: 100%;
 }
+.sp_recent td {
+	padding: 0 0.4em;
+}
 .sp_middle {
 	vertical-align: middle;
 }
@@ -32,9 +35,9 @@ hr {
 	padding: 0 0.4em;
 }
 #sp_credits {
-    border-radius: 7px;
-    box-shadow: none;
-    padding: 0 8px 16px;
+	border-radius: 7px;
+	box-shadow: none;
+	padding: 0 8px 16px;
 }
 .sp_fullwidth {
 	width: 100%;
@@ -100,8 +103,8 @@ hr {
 .sp_staff_divider {
 	border-bottom: 1px dashed #AAA;
 }
-tr.sp_recent:nth-child(odd) {
-	background: #eff1f3;
+tr.sp_recent:nth-child(even) {
+	background: #FAFAFA;
 }
 .sp_recent_icon {
 	vertical-align: middle;
@@ -109,9 +112,28 @@ tr.sp_recent:nth-child(odd) {
 }
 .sp_recent_header {
 	background: #ced7e5;
+	color: #464c55;
+	text-align: left;
+}
+.sp_recent_header th {
+	padding: 0.5em;
 }
 .sp_recent_subject {
-	width: 110em;
+	width: 52%;
+}
+.sp_recent_board,
+.sp_recent_starter,
+.sp_recent_replies {
+	text-align: center;
+}
+.sp_recent_board {
+	width: 12%;
+}
+.sp_recent_starter {
+	width: 10%;
+}
+.sp_recent_replies {
+	width: 8%;
 }
 .sp_recent_label {
 	float: left;
@@ -121,7 +143,12 @@ tr.sp_recent:nth-child(odd) {
 	text-align: center;
 }
 .sp_recent_poster {
-	width: 35em;
+	min-width: 18em;
+	max-width: 18em;
+	text-align: left;
+}
+.sp_recent_poster a {
+	font-weight: bold;
 }
 .sp_image {
 	text-align: center;
@@ -280,7 +307,8 @@ table.sp_block {
 	color: green;
 }
 .sp_block_section, .sp_block_section_last {
-	background: transparent;
+/*     background: transparent; */
+	background: #F1F3F5;
 	margin: 2px 0 .7em 0;
 	border: 1px solid #ccc;
 	border-radius: 0 0 5px 5px;
@@ -292,6 +320,14 @@ table.sp_block {
 }
 .portalbg2 {
 	padding: 10px 0;
+}
+
+/* Recent Topics specific margins/padding */
+#sp_block_15 div.sp_block,
+#sp_block_15 div[class^=portalbg],
+#sp_block_16 div.sp_block,
+#sp_block_16 div[class^=portalbg] {
+   padding: 0;
 }
 
 body {
@@ -317,7 +353,7 @@ body {
 	overflow: auto;
 	height: 200px;
 	box-shadow: 0 -1px 0 #ccc;
-    height: 200px;
+	height: 200px;
 }
 .shoutbox_list_compact li {
 	padding: 4px 0 4px 4px;
@@ -627,9 +663,9 @@ dl.sp_form img, #sp_add_articles_list_header img {
 }
 #sp_rich_editor {
 	padding-top: 1em;
-    margin: 0 auto;
-    max-width: 97%;
-    width: 60em;
+	margin: 0 auto;
+	max-width: 97%;
+	width: 60em;
 }
 #sp_text_editor {
 	padding: 1em;
