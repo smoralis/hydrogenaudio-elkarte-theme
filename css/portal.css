@@ -143,9 +143,10 @@ tr.sp_recent:nth-child(even) {
 	text-align: center;
 }
 .sp_recent_poster {
-	min-width: 18em;
-	  max-width: 18em;
+	min-width: 8em;
+	max-width: 18em;
 	text-align: left;
+	white-space: nowrap;
 }
 .sp_recent_poster a {
 	font-weight: bold;
@@ -847,6 +848,12 @@ dl.sp_form img, #sp_add_articles_list_header img {
 		width: 100% !important;
 		display: block;
 	}
+	a[href$="#new"] {
+		white-space: pre-line;
+	}
+	a[href$="#new"]:before {
+		content: "\A"
+	}
 	#sp_left {
 		left: 0;
 		width: 100% !important;
@@ -859,33 +866,43 @@ dl.sp_form img, #sp_add_articles_list_header img {
 	#sp_collapse_side1, #sp_collapse_side2, #sp_collapse_side3, #sp_collapse_side4 {
 		padding: 6px;
 	}
+}
+
+
+@media screen and (max-width: 55em)
+{
+	a[href$="#new"] {
+		margin-left: 0.25em;
+	}
 	.sp_recent_header {
 		display: none;
 	}
 	.sp_recent td {
-		display: inline;
-		white-space: pre-line
+		display: table-row;
+/*      white-space: pre-line */
+		text-align: left;
+	}
+	td[class^='sp_recent']:before {
+		font-weight: bold;
 	}
 	.sp_recent_subject:before {
-		font-weight: bold;
 		content: "Topic subject"
 	}
 	.sp_recent_board:before {
-		font-weight: bold;
 		content: "Forum"
 	}
 	.sp_recent_starter:before {
-		font-weight: bold;
 		content: "Topic starter"
 	}
-	.sp_recent_starter:after {
-		font-weight: bold;
+	.sp_recent_replies:before {
 		content: "Replies"
 	}
 	.sp_recent_poster:before {
-		font-weight: bold;
 		content: "Last post "
 	}
+	.sp_recent_poster a {
+	  font-weight: normal;
+  }
 	.sp_recent_info.righttext {
 		margin-left:-1px;
 		text-align: left;
@@ -901,19 +918,14 @@ dl.sp_form img, #sp_add_articles_list_header img {
 	.sp_recent_info.righttext>a:before {
 		content: "Latest post by "
 	}
-	.sp_recent_info.righttext {
-		margin-left:-1px;
-		text-align: left;
-		display: block;
-		padding-right: 10px !important;
+	.sp_recent_poster.righttext br {
+		display: none;
 	}
-	.sp_recent_info.righttext  .sp_recent_label {
-		padding-right: 5px;
+	.sp_recent_poster.righttext time:before {
+		content: " "
 	}
-	.sp_recent_info.righttext a {
-		float: left !important;
-	}
-	.sp_recent_info.righttext>a:before {
-		content: "Latest post by "
+	.sp_recent_poster time {
+		font-style:italic;
 	}
 }
+
