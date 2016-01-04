@@ -1029,7 +1029,7 @@ a.active {
 /* ------------------------------------------------------- */
 
 .drop_area {
-	-webkit-font-smoothing: antialiased;
+	-webkit-font-smoothing: auto;
 	color: #43a8da;
 	background-color: #eee;
 	border: 1px dashed #ccc;

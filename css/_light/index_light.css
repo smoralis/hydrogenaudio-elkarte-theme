@@ -189,7 +189,7 @@ strong {
 .ui-dialog .ui-dialog-titlebar,
 .popup_heading {
 	font-weight: 600;
-	-webkit-font-smoothing: antialiased;
+	-webkit-font-smoothing: auto;
 	font-family: "Segoe UI Semibold", "Segoe UI", "Helvetica Neue Medium", "Helvetica Neue";
 }
 
@@ -1348,7 +1348,7 @@ div.bbc_footnotes .meaction{
 	background: #fdfdfd;
 }
 .drop_area {
-	-webkit-font-smoothing: antialiased;
+	-webkit-font-smoothing: auto;
 	color: #444444;
 	background-color: rgb(230, 230, 230);
 	border: dashed 1px #ccc;
