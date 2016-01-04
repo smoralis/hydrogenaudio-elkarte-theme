@@ -4627,10 +4627,10 @@ dl.no_members {
 		text-overflow: clip;
 	}
 	.poster .listlevel1 {
-        float: left;
-        display: inline-block;
-        margin: 0 0.5em 1em;
-    }
+		float: left;
+		display: inline-block;
+		margin: 0 0.5em 1em;
+	}
 	.poster li.membergroup {
 		display: none;
 	}
