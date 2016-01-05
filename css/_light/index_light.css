@@ -1042,15 +1042,17 @@ div.bbc_footnotes .meaction{
 	border-bottom: 1px solid #ccc;
 }
 .topic_listing {
-	background: #e4e4e4;
 	box-shadow: 1px 2px 4px #eee;
 }
 .topic_listing>li {
 	border: 1px solid #ddd;
 	border-bottom: 1px solid #ccc;
 }
+.topic_listing>li:nth-child(even) {
+	background: #F1F3F5;
+}
 .basic_row {
-	background: #fff;
+	background: transparent;
 }
 .topic_sorting_row {
 	background: transparent;
