@@ -730,7 +730,7 @@ div.windowbg, div.windowbg2 {
 	font-size: 1.357em;
 }
 /* Shorten url's inside posts. */
-a.bbc_link {
+/*a.bbc_link {
 	display: inline-block;
 	white-space: nowrap;
 	overflow: hidden;
@@ -738,7 +738,7 @@ a.bbc_link {
 	max-width: 100%;
 	vertical-align: bottom;
 	word-wrap: normal;
-}
+}*/
 
 /*	$AJAX		*/
 /* ------------------------------------------------------- */
