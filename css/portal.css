@@ -148,9 +148,6 @@ tr.sp_recent:nth-child(even) {
 	text-align: left;
 	white-space: nowrap;
 }
-.sp_recent_poster a {
-	font-weight: bold;
-}
 .sp_image {
 	text-align: center;
 	line-height: 1.4em;
