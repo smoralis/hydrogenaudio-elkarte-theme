@@ -145,7 +145,7 @@ tr.sp_recent:nth-child(even) {
 .sp_recent_poster {
 	min-width: 8em;
 	max-width: 18em;
-	text-align: left;
+	text-align: right;
 	white-space: nowrap;
 }
 .sp_image {
@@ -905,19 +905,13 @@ dl.sp_form img, #sp_add_articles_list_header img {
 		display: block;
 		padding-right: 10px !important;
 	}
-	.sp_recent_info.righttext  .sp_recent_label {
+	.sp_recent_poster .sp_recent_label {
 		padding-right: 5px;
 	}
-	.sp_recent_info.righttext a {
-		float: left !important;
-	}
-	.sp_recent_info.righttext>a:before {
-		content: "Latest post by: "
-	}
-	.sp_recent_poster.righttext br {
+	.sp_recent_poster br {
 		display: none;
 	}
-	.sp_recent_poster.righttext time:before {
+	.sp_recent_poster time:before {
 		content: " "
 	}
 	.sp_recent_poster time {
