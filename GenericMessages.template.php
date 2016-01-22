@@ -58,7 +58,7 @@ function template_build_poster_div($message, $ignoring = false)
 
 		// Show join date
 		$poster_div .= '
-									<li class="listlevel2 postjoin">' . $txt['member_joined'] . ': ' . $message['member']['registered'] . '</li>';
+									<li class="listlevel2 postjoin">' . $txt['member_joined'] . ': ' . strftime('%d %B, %Y', forum_time(true, $message['member']['registered_timestamp'])) . '</li>';
 
 		// Show how many posts they have made.
 		if (!isset($context['disabled_fields']['posts']))
