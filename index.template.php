@@ -322,6 +322,7 @@ function template_th_search_bar()
 	$board_list = array();
 	if (!empty($context['current_board']))
 	{
+		require_once(SUBSDIR . '/Boards.subs.php');
 		$board_list[] = $context['current_board'];
 		addChildBoards($board_list);
 	}
