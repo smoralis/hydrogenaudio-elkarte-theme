@@ -319,6 +319,13 @@ function template_th_search_bar()
 {
 	global $context, $modSettings, $txt, $scripturl;
 
+	$board_list = array();
+	if (!empty($context['current_board']))
+	{
+		$board_list[] = $context['current_board'];
+		addChildBoards($board_list);
+	}
+
 	echo '
 			<form id="search_form" action="', $scripturl, '?action=search;sa=results" method="post" accept-charset="UTF-8">
 				<label for="quicksearch">
@@ -362,8 +369,17 @@ function template_th_search_bar()
 				<input type="hidden" name="', (!empty($modSettings['search_dropdown']) ? 'sd_topic' : 'topic'), '" value="', $context['current_topic'], '" />';
 	// If we're on a certain board, limit it to this board ;).
 	elseif (!empty($context['current_board']))
-		echo '
+	{
+		if (count($board_list))
+		{
+			foreach($board_list as $board)
+				echo '
+				<input type="hidden" name="', (!empty($modSettings['search_dropdown']) ? 'sd_brd[' : 'brd['), $board, ']"', ' value="', $board, '" />';
+		}
+		else
+			echo '
 				<input type="hidden" name="', (!empty($modSettings['search_dropdown']) ? 'sd_brd[' : 'brd['), $context['current_board'], ']"', ' value="', $context['current_board'], '" />';
+	}
 
 	echo '
 				<input type="submit" name="search;sa=results" value="', $txt['search'], '" class="button_submit', (!empty($modSettings['search_dropdown'])) ? ' with_select' : '', '" />
