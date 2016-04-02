@@ -3847,6 +3847,7 @@ dl.no_members {
 	position: absolute;
 	display: none;
 	padding: 0.5em;
+	max-width: 12em;
 }
 #mlsearch_options.nojs {
 	display: none;
@@ -3864,6 +3865,7 @@ dl.no_members {
 }
 #mlsearch_options .mlsearch_option {
 	padding: 0.2em 0;
+	line-height: 2em;
 }
 
 
