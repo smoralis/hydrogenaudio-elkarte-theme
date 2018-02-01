@@ -1,23 +1,24 @@
 <?php
 
 /**
- * @package SimplePortal
+ * @package SimplePortal ElkArte
  *
  * @author SimplePortal Team
- * @copyright 2014 SimplePortal Team
+ * @copyright 2015-2017 SimplePortal Team
  * @license BSD 3-clause
- *
- * @version 2.4.2
+ * @version 1.0.0 RC1
  */
 
 /**
- * Show the list of availalbe blocks in the system
+ * Show the list of available blocks in the system
  * If no specific area is provided will show all areas with available blocks in each
  * otherwise will just show the chosen area
  */
 function template_block_list()
 {
 	global $context, $scripturl, $txt;
+
+	$sortables = array();
 
 	echo '
 	<div id="sp_manage_blocks">';
@@ -49,7 +50,7 @@ function template_block_list()
 		if (empty($context['blocks'][$side['name']]))
 		{
 			echo '
-				<tr class="windowbg">
+				<tr class="content">
 					<td class="centertext noticebox" colspan="4"></td>
 				</tr>';
 		}
@@ -57,7 +58,7 @@ function template_block_list()
 		foreach($context['blocks'][$side['name']] as $block)
 		{
 			echo '
-				<tr id="block_',$block['id'],'" class="windowbg">
+				<tr id="block_',$block['id'],'" class="content">
 					<td>', $block['label'], '</td>
 					<td>', $block['type_text'], '</td>
 					<td class="centertext">', implode(' ', $block['actions']), '</td>
@@ -84,7 +85,7 @@ function template_block_list()
 			containment: "#sp_manage_blocks",
 			href: "?action=admin;area=portalblocks",
 			placeholder: "ui-state-highlight",
-			axis: "y",
+			axis: "y"
 		});
 	</script>';
 }
@@ -94,7 +95,7 @@ function template_block_list()
  */
 function template_block_edit()
 {
-	global $context, $settings, $options, $scripturl, $txt, $helptxt, $modSettings;
+	global $context, $settings, $options, $scripturl, $txt, $helptxt;
 
 	// Want to take a look before you save?
 	if (!empty($context['SPortal']['preview']))
@@ -119,15 +120,9 @@ function template_block_edit()
 				<a class="hdicon cat_img_helptopics help" href="', $scripturl, '?action=quickhelp;help=sp-blocks', $context['SPortal']['is_new'] ? 'Add' : 'Edit', '" onclick="return reqOverlayDiv(this.href);" title="', $txt['help'], '"></a>
 				', $context['SPortal']['is_new'] ? $txt['sp-blocksAdd'] : $txt['sp-blocksEdit'], '
 			</h3>
-			<div class="windowbg">
 				<div class="sp_content_padding">
-					<dl class="sp_form">
-						<dt>
-							', $txt['sp-adminColumnType'], ':
-						</dt>
-						<dd>
-							', $context['SPortal']['block']['type_text'], '
-						</dd>
+					<h3 class="secondary_header">',$context['SPortal']['block']['type_text'], '</h3>
+					<dl class="sp_form content">
 						<dt>
 							<label for="block_name">', $txt['sp-adminColumnName'], ':</label>
 						</dt>
@@ -146,7 +141,36 @@ function template_block_edit()
 
 	echo '
 							</select>
-						</dd>';
+						</dd>
+						<dt>
+							<label for="block_styles">', $txt['sp_admin_blocks_col_styles'], ':</label>
+						</dt>
+						<dd>
+							<select name="styles" id="block_styles">';
+
+	foreach ($context['SPortal']['block']['style_profiles'] as $profile)
+		echo '
+							<option value="', $profile['id'], '"', $profile['id'] == $context['SPortal']['block']['styles'] ? ' selected="selected"' : '', '>', $profile['label'], '</option>';
+
+	echo '
+							</select>
+						</dd>
+						<dt>
+							<label for="block_visibility">', $txt['sp_admin_blocks_col_visibility'], ':</label>
+						</dt>
+						<dd>
+							<select name="visibility" id="block_visibility">';
+
+	foreach ($context['SPortal']['block']['visibility_profiles'] as $profile)
+		echo '
+					<option value="', $profile['id'], '"', $profile['id'] == $context['SPortal']['block']['visibility'] ? ' selected="selected"' : '', '>', $profile['label'], '</option>';
+
+	echo '
+							</select>
+						</dd>
+					</dl>
+					<h3 class="secondary_header">', $txt['sp-adminBlockSettingsName'], '</h3>
+					<dl class="sp_form content">';
 
 	// Display any options that are available for this block
 	foreach ($context['SPortal']['block']['options'] as $name => $type)
@@ -157,18 +181,25 @@ function template_block_edit()
 		echo '
 						<dt>';
 
-		if (!empty($helptxt['sp_param_' . $context['SPortal']['block']['type'] . '_' . $name]))
+		// Look for the help text using legacyNaming
+		$helpvar = 'sp_param_sp_' . str_replace('_', '', lcfirst(ucwords($context['SPortal']['block']['type'], '_'))) . '_' . $name;
+		if (!empty($helptxt[$helpvar]))
 			echo '
-							<a class="help" href="', $scripturl, '?action=quickhelp;help=sp_param_', $context['SPortal']['block']['type'] , '_' , $name, '" onclick="return reqOverlayDiv(this.href);">
+							<a class="help" href="', $scripturl, '?action=quickhelp;help=', $helpvar, '" onclick="return reqOverlayDiv(this.href);">
 								<img class="icon" src="', $settings['images_url'], '/helptopics.png" alt="', $txt['help'], '" />
 							</a>';
 
+		if ($type === 'space')
+			echo '';
+		else
+			echo '
+							<label for="', $type === 'bbc' ? 'bbc_content' : $name, '">', $txt['sp_param_' . $context['SPortal']['block']['type'] . '_' . $name], ':</label>';
+
 		echo '
-							<label for="', $type == 'bbc' ? 'bbc_content' : $name, '">', $txt['sp_param_' . $context['SPortal']['block']['type'] . '_' . $name], ':</label>
 						</dt>
 						<dd>';
 
-		if ($type == 'bbc')
+		if ($type === 'bbc')
 		{
 			echo '
 						</dd>
@@ -182,35 +213,35 @@ function template_block_edit()
 					</div>
 					<dl class="sp_form">';
 		}
-		elseif ($type == 'boards' || $type == 'board_select')
+		elseif ($type === 'boards' || $type === 'board_select')
 		{
-					echo '
+			echo '
 							<input type="hidden" name="parameters[', $name, ']" value="" />';
 
-				if ($type == 'boards')
+			if ($type === 'boards')
 					echo '
 							<select name="parameters[', $name, '][]" id="', $name, '" size="7" multiple="multiple">';
-				else
+			else
 					echo '
 							<select name="parameters[', $name, '][]" id="', $name, '">';
 
-				foreach ($context['SPortal']['block']['board_options'][$name] as $option)
-					echo '
+			foreach ($context['SPortal']['block']['board_options'][$name] as $option)
+				echo '
 								<option value="', $option['value'], '"', ($option['selected'] ? ' selected="selected"' : ''), ' >', $option['text'], '</option>';
 
-				echo '
+			echo '
 							</select>';
 		}
-		elseif ($type == 'int')
+		elseif ($type === 'int')
 			echo '
 							<input type="text" name="parameters[', $name, ']" id="', $name, '" value="', $context['SPortal']['block']['parameters'][$name],'" size="7" class="input_text" />';
-		elseif ($type == 'text')
+		elseif ($type === 'text')
 			echo '
 							<input type="text" name="parameters[', $name, ']" id="', $name, '" value="', $context['SPortal']['block']['parameters'][$name],'" size="25" class="input_text" />';
-		elseif ($type == 'check')
+		elseif ($type === 'check')
 				echo '
 							<input type="checkbox" name="parameters[', $name, ']" id="', $name, '"', !empty($context['SPortal']['block']['parameters'][$name]) ? ' checked="checked"' : '', ' class="input_check" />';
-		elseif ($type == 'select')
+		elseif ($type === 'select')
 		{
 				$options = explode('|', $txt['sp_param_' . $context['SPortal']['block']['type'] . '_' . $name . '_options']);
 
@@ -236,7 +267,7 @@ function template_block_edit()
 				echo '
 							</select>';
 		}
-		elseif ($type == 'textarea')
+		elseif ($type === 'textarea')
 		{
 			echo '
 						</dd>
@@ -248,8 +279,16 @@ function template_block_edit()
 					</div>
 					<dl class="sp_form">';
 		}
+		elseif ($type === 'space')
+		{
+			echo '
+						</dd>
+					</dl>
+					<hr>
+					<dl class="sp_form">';
+		}
 
-		if ($type != 'bbc')
+		if ($type != 'bbc' && $type != 'textarea')
 			echo '
 						</dd>';
 	}
@@ -282,8 +321,8 @@ function template_block_edit()
 						<dd>
 							<select id="order" name="placement"', !$context['SPortal']['is_new'] ? ' onchange="this.form.block_row.disabled = this.options[this.selectedIndex].value == \'\';"' : '', '>
 								', !$context['SPortal']['is_new'] ? '<option value="nochange">' . $txt['sp-placementUnchanged'] . '</option>' : '', '
-								<option value="before"', (!empty($context['SPortal']['block']['placement']) && $context['SPortal']['block']['placement'] == 'before' ? ' selected="selected"' : ''), '>', $txt['sp-placementBefore'], '...</option>
-								<option value="after"', (!empty($context['SPortal']['block']['placement']) && $context['SPortal']['block']['placement'] == 'after' ? ' selected="selected"' : ''), '>', $txt['sp-placementAfter'], '...</option>
+								<option value="before"', (!empty($context['SPortal']['block']['placement']) && $context['SPortal']['block']['placement'] === 'before' ? ' selected="selected"' : ''), '>', $txt['sp-placementBefore'], '...</option>
+								<option value="after"', (!empty($context['SPortal']['block']['placement']) && $context['SPortal']['block']['placement'] === 'after' ? ' selected="selected"' : ''), '>', $txt['sp-placementAfter'], '...</option>
 							</select>
 							<select id="block_row" name="block_row"', !$context['SPortal']['is_new'] ? ' disabled="disabled"' : '', '>';
 
@@ -298,7 +337,7 @@ function template_block_edit()
 						</dd>';
 	}
 
-	if ($context['SPortal']['block']['type'] != 'sp_boardNews')
+	if ($context['SPortal']['block']['type'] !== 'sp_boardNews')
 	{
 		echo '
 						<dt>
@@ -310,19 +349,18 @@ function template_block_edit()
 	}
 
 	echo '
-						<dt>
-							<label for="block_active">', $txt['sp-blocksActive'], ':</label>
-						</dt>
-						<dd>
-							<input type="checkbox" name="block_active" id="block_active" value="1"', $context['SPortal']['block']['state'] ? ' checked="checked"' : '', ' class="input_check" />
-						</dd>
-					</dl>
-					<div class="sp_button_container">
-						<input type="submit" name="preview_block" value="', $txt['sp-blocksPreview'], '" class="right_submit" />
-						<input type="submit" name="add_block" value="', !$context['SPortal']['is_new'] ? $txt['sp-blocksEdit'] : $txt['sp-blocksAdd'], '" class="right_submit" />
-					</div>
-				</div>
-			</div>';
+				<dt>
+					<label for="block_active">', $txt['sp-blocksActive'], ':</label>
+				</dt>
+				<dd>
+					<input type="checkbox" name="block_active" id="block_active" value="1"', $context['SPortal']['block']['state'] ? ' checked="checked"' : '', ' class="input_check" />
+				</dd>
+			</dl>
+			<div class="submitbutton">
+				<input type="submit" name="preview_block" value="', $txt['sp-blocksPreview'], '" class="button_submit" />
+				<input type="submit" name="add_block" value="', !$context['SPortal']['is_new'] ? $txt['sp-blocksEdit'] : $txt['sp-blocksAdd'], '" class="button_submit" />
+			</div>
+		</div>';
 
 	if (!empty($context['SPortal']['block']['column']))
 		echo '
@@ -331,148 +369,7 @@ function template_block_edit()
 	echo '
 			<input type="hidden" name="block_type" value="', $context['SPortal']['block']['type'], '" />
 			<input type="hidden" name="block_id" value="', $context['SPortal']['block']['id'], '" />
-			<input type="hidden" name="', $context['session_var'], '" value="', $context['session_id'], '" />';
-
-	// Display Options is integrated
-	if (!empty($modSettings['sp_enableIntegration']))
-	{
-		echo '
-			<br />
-			<h3 class="category_header">
-				<a class="hdicon cat_img_helptopics help" href="', $scripturl, '?action=quickhelp;help=sp-blocksDisplayOptions" onclick="return reqOverlayDiv(this.href);" title="', $txt['help'], '"></a>
-				', $txt['sp-blocksDisplayOptions'], '
-			</h3>
-			<div class="windowbg2">
-				<div class="sp_content_padding">
-					<span class="floatright">', $txt['sp-blocksAdvancedOptions'], '<input type="checkbox" name="display_advanced" id="display_advanced" onclick="$(\'#sp_display_advanced\').slideToggle(300); document.getElementById(\'display_simple\').disabled = this.checked;" ', empty($context['SPortal']['block']['display_type']) ? '' : ' checked="checked"', ' class="input_check" /></span>
-					', $txt['sp-blocksShowBlock'], '
-					<select name="display_simple" id="display_simple"', empty($context['SPortal']['block']['display_type']) ? '' : ' disabled="disabled"', '>';
-
-		foreach ($context['simple_actions'] as $action => $label)
-			echo '
-						<option value="', $action, '"', in_array($action, $context['SPortal']['block']['display']) ? ' selected="selected"' : '', '>', $label, '</option>';
-
-		echo '
-					</select>
-					<div id="sp_display_advanced"', empty($context['SPortal']['block']['display_type']) ? ' style="display: none;"' : '', '>';
-
-		$display_types = array('actions', 'boards', 'pages');
-		foreach ($display_types as $type)
-		{
-			if (empty($context['display_' . $type]))
-				continue;
-
-			echo '
-						<a href="javascript:void(0);" onclick="sp_collapseObject(\'', $type, '\')">
-							<img id="sp_collapse_', $type, '" src="', $settings['images_url'], '/selected_open.png" alt="*" />
-						</a> ', $txt['sp-blocksSelect' . ucfirst($type)], '
-						<ul id="sp_object_', $type, '" class="reset sp_display_list" style="display: none;">';
-
-			foreach ($context['display_' . $type] as $index => $action)
-			{
-				echo '
-							<li>
-								<input type="checkbox" name="display_', $type, '[]" id="', $type, $index, '" value="', $index, '"', in_array($index, $context['SPortal']['block']['display']) ? ' checked="checked"' : '', ' class="input_check" />
-								<label for="', $type, $index, '">', $action, '</label>
-							</li>';
-		}
-
-			echo '
-							<li>
-								<input type="checkbox" onclick="invertAll(this, this.form, \'display_', $type, '[]\');" class="input_check" /> <em>', $txt['check_all'], '</em>
-							</li>
-						</ul>
-						<br />';
-		}
-
-		echo '
-						<a class="help" href="', $scripturl, '?action=quickhelp;help=sp-blocksCustomDisplayOptions" onclick="return reqOverlayDiv(this.href);">
-							<img class="icon" src="', $settings['images_url'], '/helptopics.png" alt="', $txt['help'], '" />
-						</a>
-						<label for="display_custom">', $txt['sp_display_custom'], ': </label>
-						<input class="input_text" type="text" name="display_custom" id="display_custom" value="', $context['SPortal']['block']['display_custom'], '" />
-					</div>
-					<div class="sp_button_container">
-						<input type="submit" name="add_block" value="', !$context['SPortal']['is_new'] ? $txt['sp-blocksEdit'] : $txt['sp-blocksAdd'], '" class="right_submit" />
-					</div>
-				</div>
-			</div>';
-	}
-
-	$style_sections = array('title' => 'left', 'body' => 'right');
-	$style_types = array('default' => 'DefaultClass', 'class' => 'CustomClass', 'style' => 'CustomStyle');
-	$style_parameters = array(
-		'title' => array('category_header', 'secondary_header'),
-		'body' => array('portalbg', 'portalbg2', 'information', 'roundframe'),
-	);
-
-	// Style options for the block, but not boardNews
-	if ($context['SPortal']['block']['type'] != 'sp_boardNews')
-	{
-		echo '
-			<br />
-			<h3 class="category_header">
-				<a class="hdicon cat_img_helptopics help" href="', $scripturl, '?action=quickhelp;help=sp-blocksStyleOptions" onclick="return reqOverlayDiv(this.href);" title="', $txt['help'], '"></a>
-				', $txt['sp-blocksStyleOptions'], '
-			</h3>
-			<div class="windowbg2">
-				<div class="sp_content_padding">';
-
-		foreach ($style_sections as $section => $float)
-		{
-			echo '
-					<dl id="sp_edit_style_', $section, '" class="sp_form sp_float_', $float, '">';
-
-			foreach ($style_types as $type => $label)
-			{
-				echo '
-						<dt>
-							', $txt['sp-blocks' . ucfirst($section) . $label], ':
-						</dt>
-						<dd>';
-
-				if ($type == 'default')
-				{
-					echo '
-							<select name="', $section, '_default_class" id="', $section, '_default_class">';
-
-					foreach ($style_parameters[$section] as $class)
-						echo '
-								<option value="', $class, '"', $context['SPortal']['block']['style'][$section . '_default_class'] == $class ? ' selected="selected"' : '', '>', $class, '</option>';
-
-					echo '
-							</select>';
-				}
-				else
-					echo '
-							<input type="text" name="', $section, '_custom_', $type, '" id="', $section, '_custom_', $type, '" value="', $context['SPortal']['block']['style'][$section . '_custom_' . $type], '" class="input_text" />';
-
-				echo '
-						</dd>';
-			}
-
-			echo '
-						<dt>
-							', $txt['sp-blocksNo' . ucfirst($section)], ':
-						</dt>
-						<dd>
-							<input type="checkbox" name="no_', $section, '" id="no_', $section, '" value="1"', !empty($context['SPortal']['block']['style']['no_' . $section]) ? ' checked="checked"' : '', 'onclick="check_style_options();" class="input_check" />
-						</dd>
-					</dl>';
-		}
-
-		echo '
-					<script><!-- // --><![CDATA[
-						check_style_options();
-					// ]]></script>
-					<div class="sp_button_container">
-						<input type="submit" name="add_block" value="', !$context['SPortal']['is_new'] ? $txt['sp-blocksEdit'] : $txt['sp-blocksAdd'], '" class="right_submit" />
-					</div>
-				</div>
-			</div>';
-	}
-
-	echo '
+			<input type="hidden" name="', $context['session_var'], '" value="', $context['session_id'], '" />
 		</form>
 	</div>';
 }
@@ -500,20 +397,16 @@ function template_block_select_type()
 		$this_title = !empty($this_block) ? sprintf($txt['sp-adminBlockInuse'], $context['location'][$this_block['column']]) . ': ' . (!empty($this_block['state']) ? '(' . $txt['sp-blocksActive'] . ')' : '') : '';
 
 		echo '
-						<li class="windowbg">
-								<input type="radio" name="selected_type[]" id="block_', $type['function'], '" value="', $type['function'], '" class="input_radio" />
-								<strong><label ', (!empty($this_block) ? 'class="sp_block_active" ' : ''), 'for="block_', $type['function'], '" title="', $this_title, '">', $txt['sp_function_' . $type['function'] . '_label'], '</label></strong>
-								<p class="smalltext">', $txt['sp_function_' . $type['function'] . '_desc'], '</p>';
-
-		echo '
-						</li>
-						';
+				<li class="content">
+					<input type="radio" name="selected_type[]" id="block_', $type['function'], '" value="', $type['function'], '" class="input_radio" />
+					<strong><label ', (!empty($this_block) ? 'class="sp_block_active" ' : ''), 'for="block_', $type['function'], '" title="', $this_title, '">', isset($txt['sp_function_' . $type['function'] . '_label']) ? $txt['sp_function_' . $type['function'] . '_label'] : $type['function'], '</label></strong>
+					<p class="smalltext">', isset($txt['sp_function_' . $type['function'] . '_desc']) ? $txt['sp_function_' . $type['function'] . '_desc'] : $txt['not_applicable'], '</p>
+				</li>';
 	}
 
 	echo '
-<li>
-					<input type="submit" name="select_type" value="', $txt['sp-blocksSelectType'], '" class="right_submit" />
-			</li></ul>';
+				</ul>
+				<input type="submit" name="select_type" value="', $txt['sp-blocksSelectType'], '" class="right_submit" />';
 
 	if (!empty($context['SPortal']['block']['column']))
 		echo '

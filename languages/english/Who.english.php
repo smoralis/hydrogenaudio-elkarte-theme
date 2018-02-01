@@ -1,5 +1,5 @@
 <?php
-// Version: 1.0; Who
+// Version: 1.1; Who
 
 $txt['who_hidden'] = '<em>hmm... no idea, sorry</em>';
 $txt['who_admin'] = 'Viewing the admin portal';
@@ -46,7 +46,6 @@ $txt['whoall_openidreturn'] = 'Logging in using OpenID.';
 $txt['whoall_quickmod'] = 'Moderating a board.';
 $txt['whoall_recent'] = 'Viewing a <a href="{recent_url}">list of recent topics</a>.';
 $txt['whoall_register'] = 'Registering for an account on the forum.';
-$txt['whoall_register2'] = 'Registering for an account on the forum.';
 $txt['whoall_reminder'] = 'Requesting a password reminder.';
 $txt['whoall_reporttm'] = 'Reporting a topic to a moderator.';
 $txt['whoall_spellcheck'] = 'Using the spellchecker';
@@ -145,13 +144,13 @@ $txt['credits_software'] = 'Software';
 $txt['credits_graphics'] = 'Graphics';
 $txt['credits_fonts'] = 'Fonts';
 $txt['credits_groups_contrib'] = 'Contributors';
-$txt['credits_contrib_list'] = 'For a complete list of the many individuals that contributed to the design and implementation of ElkArte, please refer to the official GitHub <a href="https://github.com/elkarte/Elkarte/graphs/contributors" target="_blank" class="new_win">list of contributors.</a>';
+$txt['credits_contrib_list'] = 'For a complete list of the many individuals that contributed to the design and implementation of Elkarte, please refer to the official GitHub <a href="https://github.com/elkarte/Elkarte/graphs/contributors" target="_blank" class="new_win">list of contributors.</a>';
 $txt['credits_license'] = 'License';
 $txt['credits_copyright'] = 'Copyright';
 $txt['credits_version'] = 'Version';
 // Replace "English" with the name of this language pack in the string below.
 $txt['credits_groups_translators'] = 'Language Translators';
-$txt['credits_translators_message'] = 'Thank you for your efforts which make it possible for people all around the world to use ElkArte.  For a complete list please refer to the official Transifex <a href="https://www.transifex.com/organization/elkarte/dashboard" target="_blank" class="new_win">list of contributors.</a>';
+$txt['credits_translators_message'] = 'Thank you for your efforts which make it possible for people all around the world to use ElkArte.  For a complete list please refer to the offical Transifex <a href="https://www.transifex.com/organization/elkarte/dashboard" target="_blank" class="new_win">list of contributors.</a>';
 
 // Overrides the already defined strings to get clean results in the table
 $txt['today'] = '%1$s';

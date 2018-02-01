@@ -1,13 +1,12 @@
 <?php
 
 /**
- * @package SimplePortal
+ * @package SimplePortal ElkArte
  *
  * @author SimplePortal Team
- * @copyright 2014 SimplePortal Team
+ * @copyright 2015-2017 SimplePortal Team
  * @license BSD 3-clause
- *
- * @version 2.4
+ * @version 1.0.0 RC1
  */
 function template_information()
 {
@@ -41,12 +40,12 @@ function template_information()
 				</div>
 			</div>
 		</div>
-		<script src="http://www.simpleportal.net/sp/current-version.js"></script>
-		<script src="http://www.simpleportal.net/sp/latest-news.js"></script>
-		<script><!-- // --><![CDATA[
+		<script src="//simpleportal.net/sp/current-version.js"></script>
+		<script src="//simpleportal.net/sp/latest-news.js"></script>
+		<script>
 			function spSetAnnouncements()
 			{
-				if (typeof(window.spAnnouncements) == "undefined" || typeof(window.spAnnouncements.length) == "undefined")
+				if (typeof(window.spAnnouncements) === "undefined" || typeof(window.spAnnouncements.length) === "undefined")
 					return;
 
 				var str = "<div style=\"margin: 4px; font-size: 0.85em;\">";
@@ -86,7 +85,7 @@ function template_information()
 				spCurrentVersion();
 			}
 			addLoadEvent(func);
-		// ]]></script>';
+		</script>';
 	}
 
 	echo '
@@ -122,7 +121,7 @@ function template_information()
 
 	echo '
 			<hr />
-			<p>', sprintf($txt['sp-info_contribute'], 'http://www.simpleportal.net/index.php?page=contribute'), '</p>
+			<p>', sprintf($txt['sp-info_contribute'], 'https://simpleportal.net/index.php?page=contribute'), '</p>
 		</div>
 	</div>';
 }

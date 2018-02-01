@@ -1,16 +1,16 @@
-/**
+/*!
  * @name      ElkArte Forum
  * @copyright ElkArte Forum contributors
  * @license   BSD http://opensource.org/licenses/BSD-3-Clause
  *
- * This software is a derived product, based on:
- *
- * Simple Machines Forum (SMF)
+ * This file contains code covered by:
  * copyright:	2011 Simple Machines (http://www.simplemachines.org)
  * license:		BSD, See included LICENSE.TXT for terms and conditions.
  *
- * @version 1.0.6
- *
+ * @version 1.1.1
+ */
+
+/**
  * This file contains javascript associated with the topic viewing including
  * Quick Modify, Quick Reply, In Topic Moderation, thumbnail expansion etc
  */
@@ -30,7 +30,6 @@ function QuickModifyTopic(oOptions)
 	this.sCurMessageId = '';
 	this.sBuffSubject = '';
 	this.oSavetipElem = false;
-	this.sSavetipText = '';
 	this.oCurSubjectDiv = null;
 	this.oTopicModHandle = document;
 	this.bInEditMode = false;
@@ -54,10 +53,6 @@ QuickModifyTopic.prototype.init = function ()
 // called from the double click in the div
 QuickModifyTopic.prototype.modify_topic = function (topic_id, first_msg_id)
 {
-	// Add backwards compatibility with old themes.
-	if (typeof(cur_session_var) === 'undefined')
-		cur_session_var = 'sesc';
-
 	// already editing
 	if (this.bInEditMode)
 	{
@@ -143,20 +138,15 @@ QuickModifyTopic.prototype.modify_topic_show_edit = function (subject)
 	this.oCurSubjectDiv.onmouseover = function (oEvent) {return this.instanceRef.modify_topic_mouseover(oEvent);};
 };
 
-// Yup thats right, save it
+// Yup that's right, save it
 QuickModifyTopic.prototype.modify_topic_save = function (cur_session_id, cur_session_var)
 {
 	if (!this.bInEditMode)
 		return true;
 
-	// Add backwards compatibility with old themes.
-	if (typeof(cur_session_var) === 'undefined')
-		cur_session_var = 'sesc';
+	var x = [];
 
-	var i,
-		x = [];
-
-	x[x.length] = 'subject=' + document.forms.quickModForm.subject.value.replace(/&#/g, "&#38;#").php_to8bit().php_urlencode();
+	x[x.length] = 'subject=' + document.forms.quickModForm.subject.value.replace(/&#/g, "&#38;#").php_urlencode();
 	x[x.length] = 'topic=' + parseInt(document.forms.quickModForm.elements.topic.value);
 	x[x.length] = 'msg=' + parseInt(document.forms.quickModForm.elements.msg.value);
 
@@ -317,10 +307,10 @@ QuickReply.prototype.swap = function (bInit, bSavestate)
 		bIsFull = this.opt.bIsFull;
 
 	// Default bInit to false and bSavestate to true
-	bInit = typeof(bInit) === 'undefined' ? false : true;
-	bSavestate = typeof(bSavestate) === 'undefined' ? true : false;
+	bInit = typeof(bInit) !== 'undefined';
+	bSavestate = typeof(bSavestate) === 'undefined';
 
-	// Flip our current state if not responding to an intial loading
+	// Flip our current state if not responding to an initial loading
 	if (!bInit)
 		this.bCollapsed = !this.bCollapsed;
 
@@ -346,7 +336,7 @@ QuickReply.prototype.swap = function (bInit, bSavestate)
 	if (bSavestate && 'oCookieOptions' in this.opt && this.opt.oCookieOptions.bUseCookie)
 		this.oCookie.set(this.opt.oCookieOptions.sCookieName, this.bCollapsed ? '1' : '0');
 
-	// Save the expand /collapse preferance
+	// Save the expand /collapse preference
 	if (!bInit && bSavestate && 'oThemeOptions' in this.opt && this.opt.oThemeOptions.bUseThemeSettings)
 		elk_setThemeOption(this.opt.oThemeOptions.sOptionName, this.bCollapsed ? '1' : '0', 'sThemeId' in this.opt.oThemeOptions ? this.opt.oThemeOptions.sThemeId : null, 'sAdditionalVars' in this.opt.oThemeOptions ? this.opt.oThemeOptions.sAdditionalVars : null);
 };
@@ -380,10 +370,6 @@ function QuickModify(oOptions)
 // Function called when a user presses the edit button.
 QuickModify.prototype.modifyMsg = function (iMessageId)
 {
-	// Add backwards compatibility with old themes.
-	if (typeof(sSessionVar) === 'undefined')
-		sSessionVar = 'sesc';
-
 	// Removes the accesskeys from the quickreply inputs and saves them in an array to use them later
 	if (typeof(this.opt.sFormRemoveAccessKeys) !== 'undefined')
 	{
@@ -417,7 +403,7 @@ QuickModify.prototype.modifyMsg = function (iMessageId)
 QuickModify.prototype.onMessageReceived = function (XMLDoc)
 {
 	var sBodyText = '',
-		sSubjectText = '';
+		sSubjectText;
 
 	// No longer show the 'loading...' sign.
 	ajax_indicator(false);
@@ -429,8 +415,8 @@ QuickModify.prototype.onMessageReceived = function (XMLDoc)
 	if (this.opt.sIconHide !== null)
 	{
 		this.oMsgIcon = document.getElementById('messageicon_' + this.sCurMessageId.replace("msg_", ""));
-		if (this.oMsgIcon !== null && this.oMsgIcon.style.display === 'none')
-			this.oMsgIcon.style.display = '';
+		if (this.oMsgIcon !== null && getComputedStyle(this.oMsgIcon).getPropertyValue("display") === 'none')
+			this.oMsgIcon.style.display = 'inline';
 	}
 
 	// If this is not valid then simply give up.
@@ -506,6 +492,7 @@ QuickModify.prototype.modifyCancel = function ()
 	if (this.opt.sIconHide)
 	{
 		var oCurrentMsgIcon = document.getElementById('msg_icon_' + this.sCurMessageId.replace("msg_", ""));
+
 		if (oCurrentMsgIcon !== null && oCurrentMsgIcon.src.indexOf(this.opt.sIconHide) > 0)
 			this.oMsgIcon.style.display = 'none';
 	}
@@ -543,7 +530,7 @@ QuickModify.prototype.modifySave = function (sSessionId, sSessionVar)
 	if (!this.bInEditMode)
 		return true;
 
-	this.bInEditMode = false
+	this.bInEditMode = false;
 
 	// Let's put back the accesskeys to their original place
 	if (typeof(this.opt.sFormRemoveAccessKeys) !== 'undefined')
@@ -564,14 +551,14 @@ QuickModify.prototype.modifySave = function (sSessionId, sSessionVar)
 	var oInputs = document.forms.quickModForm.getElementsByTagName('input');
 	for (i = 0; i < oInputs.length; i++)
 	{
-		if (oInputs[i].name == 'uid[]')
+		if (oInputs[i].name === 'uid[]')
 		{
 			uIds.push('uid[' + i + ']=' + parseInt(oInputs[i].value));
 		}
 	}
 
-	x[x.length] = 'subject=' + escape(document.forms.quickModForm.subject.value.replace(/&#/g, "&#38;#").php_to8bit()).replace(/\+/g, "%2B");
-	x[x.length] = 'message=' + escape(document.forms.quickModForm.message.value.replace(/&#/g, "&#38;#").php_to8bit()).replace(/\+/g, "%2B");
+	x[x.length] = 'subject=' + document.forms.quickModForm.subject.value.replace(/&#/g, "&#38;#").php_urlencode();
+	x[x.length] = 'message=' + document.forms.quickModForm.message.value.replace(/&#/g, "&#38;#").php_urlencode();
 	x[x.length] = 'topic=' + parseInt(document.forms.quickModForm.elements.topic.value);
 	x[x.length] = 'msg=' + parseInt(document.forms.quickModForm.elements.msg.value);
 	if (uIds.length > 0)
@@ -596,7 +583,7 @@ QuickModify.prototype.onModifyDone = function (XMLDoc)
 	if (!XMLDoc || !XMLDoc.getElementsByTagName('elk')[0])
 	{
 		// Mozilla will nicely tell us what's wrong.
-		if (XMLDoc.childNodes.length > 0 && XMLDoc.firstChild.nodeName === 'parsererror')
+		if (typeof XMLDoc.childNodes !== 'undefined' &&  XMLDoc.childNodes.length > 0 && XMLDoc.firstChild.nodeName === 'parsererror')
 		{
 			oErrordiv = document.getElementById('error_box');
 			oErrordiv.innerHTML = XMLDoc.firstChild.textContent;
@@ -610,6 +597,7 @@ QuickModify.prototype.onModifyDone = function (XMLDoc)
 	var message = XMLDoc.getElementsByTagName('elk')[0].getElementsByTagName('message')[0],
 		body = message.getElementsByTagName('body')[0],
 		error = message.getElementsByTagName('error')[0];
+
 	$(document.forms.quickModForm.message).removeClass('border_error');
 	$(document.forms.quickModForm.subject).removeClass('border_error');
 
@@ -641,7 +629,7 @@ QuickModify.prototype.onModifyDone = function (XMLDoc)
 			modified_element.innerHTML = message.getElementsByTagName('modified')[0].childNodes[0].nodeValue;
 
 			// Just in case it's the first time the message is modified and the element is hidden
-			modified_element.style.display = '';
+			modified_element.style.display = 'block';
 		}
 
 		// Hide the icon if we were told to
@@ -848,7 +836,7 @@ InTopicModeration.prototype.handleSubmit = function (sSubmitType)
 				return false;
 
 			oForm.action = oForm.action.replace(/;split_selection=1/, '');
-			oForm.action = oForm.action + ';restore_selected=1';
+			oForm.action += ';restore_selected=1';
 		break;
 
 		case 'split':
@@ -856,7 +844,7 @@ InTopicModeration.prototype.handleSubmit = function (sSubmitType)
 				return false;
 
 			oForm.action = oForm.action.replace(/;restore_selected=1/, '');
-			oForm.action = oForm.action + ';split_selection=1';
+			oForm.action += ';split_selection=1';
 		break;
 
 		default:
@@ -868,6 +856,201 @@ InTopicModeration.prototype.handleSubmit = function (sSubmitType)
 	return true;
 };
 
+
+/**
+ * Expands an attachment thumbnail when its clicked
+ *
+ * @param {string} thumbID
+ * @param {string} messageID
+ */
+function expandThumbLB(thumbID, messageID) {
+	var link = document.getElementById('link_' + thumbID),
+		siblings = $('a[data-lightboxmessage="' + messageID + '"]'),
+		navigation = [],
+		xDown = null,
+		yDown = null,
+		$elk_expand_icon = $('<span id="elk_lb_expand"></span>'),
+		$elk_lightbox = $('#elk_lightbox'),
+		$elk_lb_content = $('#elk_lb_content'),
+		ajaxIndicatorOn = function () {
+			$('<div id="lightbox-loading"><i class="icon icon-spin icon-xl i-spinner"></i><div>').appendTo($elk_lb_content);
+			$('html, body').addClass('elk_lb_no_scrolling');
+		},
+		ajaxIndicatorOff = function () {
+			$('#lightbox-loading').remove();
+		},
+		closeLightbox = function () {
+			// Close the lightbox and remove handlers
+			$elk_expand_icon.off('click');
+			$elk_lightbox.hide();
+			$elk_lb_content.html('').removeAttr('style').removeClass('expand');
+			$('html, body').removeClass('elk_lb_no_scrolling');
+			$(window).off('resize.lb');
+			$(window).off('keydown.lb');
+			$(window).off('touchstart.lb');
+			$(window).off('touchmove.lb');
+		},
+		openLightbox = function () {
+			// Load and open an image in the lightbox
+			$('<img id="elk_lb_img" src="' + link.href + '">')
+				.on('load', function () {
+					var screenWidth = (window.innerWidth ? window.innerWidth : $(window).width()) * (is_mobile ? 0.8 : 0.9),
+						screenHeight = (window.innerHeight ? window.innerHeight : $(window).height()) * 0.9;
+
+					$(this).css({
+						'max-width': Math.floor(screenWidth) + 'px',
+						'max-height': Math.floor(screenHeight) + 'px'
+					});
+
+					$elk_lb_content.html($(this)).append($elk_expand_icon);
+
+					ajaxIndicatorOff();
+				})
+				.on('error', function () {
+					// Perhaps a message, but for now make it look like we tried and failed
+					setTimeout(function () {
+						ajaxIndicatorOff();
+						closeLightbox();
+					}, 1500);
+				});
+		},
+		nextNav = function () {
+			// Get / Set the next image ID in the array (with wrap around)
+			thumbID = navigation[($.inArray(thumbID, navigation) + 1) % navigation.length];
+		},
+		prevNav = function () {
+			// Get / Set the previous image ID in the array (with wrap around)
+			thumbID =  navigation[($.inArray(thumbID, navigation) - 1 + navigation.length) % navigation.length];
+		},
+		navLightbox = function () {
+			// Navigate to the next image and show it in the lightbox
+			$elk_lb_content.html('').removeAttr('style').removeClass('expand');
+			ajaxIndicatorOn();
+			$elk_expand_icon.off('click');
+			link = document.getElementById('link_' + thumbID);
+			openLightbox();
+			expandLightbox();
+		},
+		expandLightbox = function () {
+			// Add an expand the image to full size when the expand icon is clicked
+			$elk_expand_icon.on('click', function () {
+				$('#elk_lb_content').addClass('expand').css({
+					'height': Math.floor(window.innerHeight * 0.95) + 'px',
+					'width': Math.floor(window.innerWidth * 0.9) + 'px',
+					'left': '0'
+				});
+				$('#elk_lb_img').removeAttr('style');
+				$elk_expand_icon.hide();
+				$(window).off('keydown.lb');
+				$(window).off('touchmove.lb');
+			});
+		};
+
+	// Create the lightbox container only if needed
+	if ($elk_lightbox.length <= 0) {
+		// For easy manipulation
+		$elk_lightbox = $('<div id="elk_lightbox"></div>');
+		$elk_lb_content = $('<div id="elk_lb_content"></div>');
+
+		$('body').append($elk_lightbox.append($elk_lb_content));
+	}
+
+	// Load the navigation array
+	siblings.each(function () {
+		navigation[navigation.length] = $(this).data('lightboximage');
+	});
+
+	// We should always have at least the thumbID
+	if (navigation.length === 0) {
+		navigation[navigation.length] = thumbID;
+	}
+
+	// Load and show the initial lightbox container div
+	ajaxIndicatorOn();
+	$elk_lightbox.fadeIn(200);
+	openLightbox();
+	expandLightbox();
+
+	// Click anywhere on the page (except the expand icon) to close the lightbox
+	$elk_lightbox.on('click', function (event) {
+		if (event.target.id !== $elk_expand_icon.attr('id')) {
+			event.preventDefault();
+			closeLightbox();
+		}
+	});
+
+	// Provide some keyboard navigation
+	$(window).on('keydown.lb', function (event) {
+		event.preventDefault();
+
+		// escape
+		if (event.keyCode === 27) {
+			closeLightbox();
+		}
+
+		// left
+		if (event.keyCode === 37) {
+			prevNav();
+			navLightbox();
+		}
+
+		// right
+		if (event.keyCode === 39) {
+			nextNav();
+			navLightbox();
+		}
+	});
+
+	// Make the image size fluid as the browser window changes
+	$(window).on('resize.lb', function () {
+		// Account for either a normal or expanded view
+		var $_elk_lb_content = $('#elk_lb_content');
+
+		if ($_elk_lb_content.hasClass('expand'))
+			$_elk_lb_content.css({'height': window.innerHeight * 0.85, 'width': window.innerWidth * 0.9});
+		else
+			$('#elk_lb_img').css({'max-height': window.innerHeight * 0.9, 'max-width': window.innerWidth * 0.8});
+	});
+
+	// Swipe navigation start, record press x/y
+	$(window).on('touchstart.lb', function (event) {
+		xDown = event.originalEvent.touches[0].clientX;
+		yDown = event.originalEvent.touches[0].clientY;
+	});
+
+	// Swipe navigation left / right detection
+	$(window).on('touchmove.lb', function(event) {
+		// No known start point ?
+		if (!xDown || !yDown)
+			return;
+
+		// Where are we now
+		var xUp = event.originalEvent.touches[0].clientX,
+			yUp = event.originalEvent.touches[0].clientY,
+			xDiff = xDown - xUp,
+			yDiff = yDown - yUp;
+
+		// Moved enough to know what direction they are swiping
+		if (Math.abs(xDiff) > Math.abs(yDiff)) {
+			if (xDiff > 0) {
+				// Swipe left
+				prevNav();
+				navLightbox();
+			} else {
+				// Swipe right
+				nextNav();
+				navLightbox();
+			}
+		}
+
+		// Reset values
+		xDown = null;
+		yDown = null;
+	});
+
+	return false;
+}
+
 /**
  * Expands an attachment thumbnail when its clicked
  *
@@ -876,7 +1059,17 @@ InTopicModeration.prototype.handleSubmit = function (sSubmitType)
 function expandThumb(thumbID)
 {
 	var img = document.getElementById('thumb_' + thumbID),
-		link = document.getElementById('link_' + thumbID);
+		link = document.getElementById('link_' + thumbID),
+		name = link.nextSibling;
+
+	// Some browsers will add empty text so loop to the next element node
+	while (name && name.nodeType !== 1) {
+		name = name.nextSibling;
+	}
+	var details = name.nextSibling;
+	while (details && details.nodeType !== 1) {
+		details = details.nextSibling;
+	}
 
 	// Save the currently displayed image attributes
 	var tmp_src = img.src,
@@ -887,6 +1080,10 @@ function expandThumb(thumbID)
 	img.src = link.href;
 	img.style.width = link.style.width;
 	img.style.height = link.style.height;
+
+	// Swap the class name on the title/desc
+	name.className = name.className.includes('_exp') ? 'attachment_name' : 'attachment_name attachment_name_exp';
+	details.className = details.className.includes('_exp') ? 'attachment_details' : 'attachment_details attachment_details_exp';
 
 	// Now place the image attributes back
 	link.href = tmp_src;
@@ -899,7 +1096,7 @@ function expandThumb(thumbID)
 /**
  * Provides a way to toggle an ignored message(s) visibility
  *
- * @param {array} msgids
+ * @param {object} msgids
  * @param {string} text
  */
 function ignore_toggles(msgids, text)
@@ -941,13 +1138,14 @@ function ignore_toggles(msgids, text)
 function sendtopicOverlayDiv(desktopURL, sHeader, sIcon)
 {
 	// Set up our div details
-	var sAjax_indicator = '<div class="centertext"><i class="fa fa-spinner fa-spin"></i></div>',
+	var sAjax_indicator = '<div class="centertext"><i class="icon icon-spin i-spinner"></i></div>',
 		oPopup_body;
 
-	sIcon = elk_images_url + '/' + (typeof(sIcon) === 'string' ? sIcon : 'helptopics.png');
+	// TODO: Even if we weren't purging icons, this is still not the right icon for this.
+	sIcon = typeof(sIcon) === 'string' ? sIcon : 'i-envelope';
 	sHeader = typeof(sHeader) === 'string' ? sHeader : help_popup_heading_text;
 
-	// Load the help page content (we just want the text to show)
+	// Load the send topic overlay div
 	$.ajax({
 		url: desktopURL,
 		type: "GET",
@@ -963,11 +1161,7 @@ function sendtopicOverlayDiv(desktopURL, sHeader, sIcon)
 			});
 
 			var form = $base_obj.find('form'),
-				url = $base_obj.find('form').attr('action'),
-				this_body,
-				send_comment,
-				recipient_name,
-				recipient_mail;
+				url = $base_obj.find('form').attr('action');
 
 			// Create the div that we are going to load
 			var oContainer = new smc_Popup({heading: (title !== '' ? title : sHeader), content: sAjax_indicator, icon: sIcon});
@@ -991,8 +1185,8 @@ function sendtopicOverlayDiv(desktopURL, sHeader, sIcon)
  * be filled in in order to send the topic
  *
  * @param {type} $this_form
- * @param {type} classname
- * @param {type} focused
+ * @param {string} classname
+ * @param {boolean} focused
  */
 function addRequiredElem($this_form, classname, focused)
 {
@@ -1016,9 +1210,9 @@ function addRequiredElem($this_form, classname, focused)
 /**
  * Send in the send topic form
  *
- * @param {type} oPopup_body
- * @param {type} url
- * @param {type} oContainer
+ * @param {object} oPopup_body
+ * @param {string} url
+ * @param {object} oContainer
  */
 function sendtopicForm(oPopup_body, url, oContainer)
 {
@@ -1039,17 +1233,14 @@ function sendtopicForm(oPopup_body, url, oContainer)
 	oPopup_body.find('input[name="send"]').on('click', function (event) {
 		event.preventDefault();
 
-		this_body = $(oPopup_body).html();
-
-		data = $this_form.serialize() + '&send=1';
-
-		var send_comment = $this_form.find('input[name="comment"]').val(),
+		var data = $this_form.serialize() + '&send=1',
 			sender_name = $this_form.find('input[name="y_name"]').val(),
 			sender_mail = $this_form.find('input[name="y_email"]').val,
 			recipient_name = $this_form.find('input[name="r_name"]').val(),
-			recipient_mail = $this_form.find('input[name="r_email"]').val();
+			recipient_mail = $this_form.find('input[name="r_email"]').val(),
+			missing_elems = false;
 
-		var missing_elems = false;
+		// Check for any input fields that were not filled in
 		if (sender_name === '')
 		{
 			addRequiredElem($this_form, 'y_name', missing_elems);
@@ -1074,9 +1265,11 @@ function sendtopicForm(oPopup_body, url, oContainer)
 			missing_elems = true;
 		}
 
+		// Missing required elements, back we go
 		if (missing_elems)
 			return;
 
+		// Send it to the server to validate the input
 		$.ajax({
 			type: 'post',
 			url: url + ';api',
@@ -1086,12 +1279,15 @@ function sendtopicForm(oPopup_body, url, oContainer)
 			var oElement = $(request).find('elk')[0],
 				text = null;
 
+			// No errors in the response, lets say it sent.
 			if (oElement.getElementsByTagName('error').length === 0)
 			{
 				text = oElement.getElementsByTagName('text')[0].firstChild.nodeValue.removeEntities();
 				text += '<br /><br /><input type="submit" name="send" value="' + sendtopic_back + '" class="button_submit"/><input type="submit" name="cancel" value="' + sendtopic_close + '" class="button_submit"/>';
 
 				oPopup_body.html(text);
+
+				// Setup the cancel button to end this entire process
 				oPopup_body.find('input[name="cancel"]').each(function () {
 					$(this).on('click', function (event) {
 						event.preventDefault();
@@ -1099,6 +1295,7 @@ function sendtopicForm(oPopup_body, url, oContainer)
 					});
 				});
 			}
+			// Invalid data in the form, like a bad email etc, show the message text
 			else
 			{
 				if (oElement.getElementsByTagName('text').length !== 0)
@@ -1114,6 +1311,8 @@ function sendtopicForm(oPopup_body, url, oContainer)
 							sendtopicForm(oPopup_body, url, oContainer);
 						});
 					});
+
+					// Cancel means cancel
 					oPopup_body.find('input[name="cancel"]').each(function () {
 						$(this).on('click', function (event) {
 							event.preventDefault();
@@ -1130,7 +1329,7 @@ function sendtopicForm(oPopup_body, url, oContainer)
 			}
 		})
 		.fail(function() {
-				oPopup_body.html(sendtopic_error.replace('{href}', url));
+			oPopup_body.html(sendtopic_error.replace('{href}', url));
 		});
 	});
 }
@@ -1153,7 +1352,7 @@ function topicSplitselect(direction, msg_id)
 /**
  * Callback function for topicSplitselect
  *
- * @param {object} XMLDoc
+ * @param {xmlCallback} XMLDoc
  */
 function onTopicSplitReceived(XMLDoc)
 {
@@ -1177,9 +1376,11 @@ function onTopicSplitReceived(XMLDoc)
 		curAction,
 		curId,
 		curList,
-		curData,
 		newItem,
-		sInsertBeforeId;
+		sInsertBeforeId,
+		oListItems,
+		right_arrow = '<i class="icon icon-lg i-chevron-circle-right"></i>',
+		left_arrow = '<i class="icon icon-lg i-chevron-circle-left"></i>';
 
 	// Loop through all of the changes returned in the xml response
 	for (i = 0; i < numChanges; i++)
@@ -1215,13 +1416,13 @@ function onTopicSplitReceived(XMLDoc)
 
 			// Let's create a nice container for the message.
 			newItem = document.createElement("li");
-			newItem.className = "windowbg2";
+			newItem.className = "";
 			newItem.id = curSection + "_" + curId;
 			newItem.innerHTML = '' +
 				'<div class="content">' +
 					'<div class="message_header">' +
 						'<a class="split_icon float' + (curSection === "selected" ? "left" : "right") + '" href="' + elk_prepareScriptUrl(elk_scripturl) + 'action=splittopics;sa=selectTopics;subname=' + topic_subject + ';topic=' + topic_id + '.' + not_selected_start + ';start2=' + selected_start + ';move=' + (curSection === "selected" ? "up" : "down") + ';msg=' + curId + '" onclick="return topicSplitselect(\'' + (curSection === "selected" ? 'up' : 'down') + '\', ' + curId + ');">' +
-							'<img src="' + images_url + '/split_' + (curSection === "selected" ? "de" : "") + 'select.png" alt="' + (curSection === "selected" ? "&lt;-" : "-&gt;") + '" />' +
+							(curSection === "selected" ? left_arrow : right_arrow) +
 						'</a>' +
 						'<strong>' + curChange.getElementsByTagName("subject")[0].firstChild.nodeValue + '</strong> ' + txt_by + ' <strong>' + curChange.getElementsByTagName("poster")[0].firstChild.nodeValue + '</strong>' +
 						'<br />' +
@@ -1237,8 +1438,4 @@ function onTopicSplitReceived(XMLDoc)
 				curList.appendChild(newItem);
 		}
 	}
-
-	// After all changes, make sure the window backgrounds are still correct for both lists.
-	applyWindowClasses(document.getElementById("messages_selected"));
-	applyWindowClasses(document.getElementById("messages_not_selected"));
 }

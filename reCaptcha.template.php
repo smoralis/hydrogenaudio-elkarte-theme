@@ -1,7 +1,10 @@
 <?php
 
-function template_verification_control_recaptcha($verify_id, $verify_context)
+/**
+ * Empty div to be populated by the JS
+ */
+function template_verification_control_recaptcha()
 {
 	echo '
-		<div class="g-recaptcha" data-sitekey="', $verify_context['site_key'], '"></div>';
+				<div id="g-recaptcha" style="padding: 1em;"></div>';
 }

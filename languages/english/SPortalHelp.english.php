@@ -1,13 +1,12 @@
 <?php
 
 /**
- * @package SimplePortal
+ * @package SimplePortal ElkArte
  *
  * @author SimplePortal Team
- * @copyright 2014 SimplePortal Team
+ * @copyright 2015-2017 SimplePortal Team
  * @license BSD 3-clause
- *
- * @version 2.4
+ * @version 1.0.0 RC1
  */
 
 global $helptxt;
@@ -27,6 +26,7 @@ $helptxt['sp_standalone_url'] = 'Full URL to the standalone file.<br /><br />Exa
 $helptxt['portaltheme'] = 'Select the theme which will be used for the portal.';
 $helptxt['sp_disableForumRedirect'] = 'If this box is unchecked, users will be redirected to the portal after they login or logout. If this box is checked, then users will be redirected to the BoardIndex.';
 $helptxt['sp_disableColor'] = 'If the Member Color Link mod is installed, this will disable the mod on the portal (except in the who\'s online list).';
+$helptxt['sp_disableMobile'] = 'Master setting to disable the portal on any devices it detects as mobile (phone not tablets).  To disable on a per block basis, leave this on and use visibility profiles.';
 $helptxt['sp_disable_random_bullets'] = 'Disables random coloring for bullet images used in portal lists.';
 $helptxt['sp_disable_php_validation'] = 'Disables validation of PHP block codes, which is to prevent syntax and database errors in code.';
 $helptxt['sp_disable_side_collapse'] = 'Disables ability to collapse the left and right sides of the portal.';
@@ -37,8 +37,7 @@ $helptxt['showleft'] = 'This will enable left side blocks on the portal and insi
 $helptxt['showright'] = 'This will enable right side blocks on the portal and inside the forum.';
 $helptxt['leftwidth'] = 'If left side blocks are enabled, their width can be specified here. The width can be specified in pixels (px) or in percentages (%).';
 $helptxt['rightwidth'] = 'If right side blocks are enabled, their width can be specified here. The width can be specified in pixels (px) or in percentages (%).';
-$helptxt['sp_enableIntegration'] = 'This setting enables blocks inside the forum. It allows the advanced <em>Display Options</em> for each block to be specified.';
-$helptxt['sp_IntegrationHide'] = 'Hide blocks in certain forum sections. The <em>Display blocks in Forum</em> setting must be enabled for this to work.';
+$helptxt['sp_IntegrationHide'] = 'Use this setting to hide blocks in certain forum sections.';
 
 // Article settings
 $helptxt['sp_articles_index'] = 'This setting enables articles to be displayed on the portal.';
@@ -47,6 +46,7 @@ $helptxt['sp_articles_index_total'] = 'This sets the total number of articles th
 $helptxt['sp_articles_length'] = 'This setting allows a limit to be set on the amount of characters an article can display on the portal page. If the article exceeds this limit it will be shortened and have an ellipsis (...) link on the end, which allows the user to view the entire article.';
 $helptxt['sp_articles_per_page'] = 'This sets the maximum amount of articles shown per page on the article listing';
 $helptxt['sp_articles_comments_per_page'] = 'This sets the maximum amount articles comments per page';
+$helptxt['sp_articles_attachment_dir'] = 'The directory to save attachments uploaded with articles.  The directory must exist and be writable.  Do not use the standard attachment directory and don\'t change this unless you know what you are doing.';
 
 // Blocks area
 $helptxt['sp_BlocksArea'] = 'Blocks are boxes which can be displayed on the portal or inside the forum. This section enables existing blocks to be modified, and new ones to be created.';
@@ -63,22 +63,20 @@ $helptxt['sp-blocksFooterList'] = 'These blocks are displayed on the bottom of t
 $helptxt['sp-blocksAdd'] = 'This area enables the selected block to be customized and configured.';
 $helptxt['sp-blocksSelectType'] = 'This area enables blocks to be created for the portal page. Pre-built blocks or custom content blocks can be created easily by selecting the appropriate options.';
 $helptxt['sp-blocksEdit'] = 'This area enables the selected block to be customized and configured.';
-$helptxt['sp-blocksDisplayOptions'] = 'This area allows you to select on which pages block will appear.';
-$helptxt['sp-blocksCustomDisplayOptions'] = 'Custom display options allows a more advanced control over where to display the block with its special syntax.<br /><br />
+$helptxt['sp-blocksCustomDisplayOptions'] = 'Custom queries allows a more advanced control over visibility options with its special syntax.<br /><br />
 <strong>Special actions include:</strong><br /><br />
-<strong>all:</strong> every page in forum.<br />
-<strong>portal:</strong> portal page and it\'s sub-actions.<br />
-<strong>forum:</strong> board index.<br />
-<strong>sforum:</strong> all actions and boards, except portal.<br />
-<strong>allaction:</strong> all actions.<br />
-<strong>allboard:</strong> all boards.<br /><br />
+<strong>all:</strong> everywhere<br />
+<strong>allaction:</strong> all actions<br />
+<strong>allboard:</strong> all boards<br />
+<strong>allpage:</strong> all pages<br />
+<strong>allcategory:</strong> all categories<br />
+<strong>allarticle:</strong> all articles<br /><br />
 <strong>Wavy (~)</strong><br />
 This symbol acts as a wildcard, allowing you to include dynamic actions like ../index.php?issue=* or ../index.php?game=*. Used as ~action<br /><br />
 <strong>Idkin (|)</strong><br />
-Another wildcard symbol which allows you to specify an exact value for a dynamic action like ../index.php?issue=1.0 or ../index.php?game=xyz. Should be used with wavy and after the action like; ~action|value<br /><br />
+Another wildcard sybmol which allows you to specify an exact value for a dynamic action like ../index.php?issue=1.0 or ../index.php?game=xyz. Should be used with wavy and after the action like; ~action|value<br /><br />
 <strong>Negator (-)</strong><br />
 This symbol is to exclude regular and dynamic actions. Should be used before the action name for regular actions and before the wavy for dynamic actions. Used as -action and -~action';
-$helptxt['sp-blocksStyleOptions'] = 'These options allow you to specify CSS styling for each blocks.';
 
 // Articles area
 $helptxt['sp_ArticlesArea'] = 'Articles are topics (first post only) which are displayed on the portal. This section enables existing articles to be modified, and new ones to be created for the portal.';
@@ -109,6 +107,12 @@ $helptxt['sp_ShoutboxArea'] = 'Shoutboxes need to be created in this section. Th
 // Add/Edit shoutboxes
 $helptxt['sp-shoutboxesWarning'] = 'The warning message that you set here will be shown in the shoutbox, anyone using the shoutbox will see this message.';
 $helptxt['sp-shoutboxesBBC'] = 'This setting allows you to choose the BBC that can be used in this shoutbox.<br /><br />Hold down the CTRL key to select or deselect a particular BBC. <br /><br />If you want to select a series of consecutive BBC, then click on the first BBC that you want to select, hold down the SHIFT key, then click on the last BBC that you want to select.';
+
+// Menus area
+$helptxt['sp_MenusArea'] = 'The main menu of the forum can be modified in this area. Additional custom menus can also be created and modified here.';
+
+// Profiles area
+$helptxt['sp_ProfilesArea'] = 'Permission, style and visibility profiles can be managed in this area. The profiles are used for blocks, pages, categories, articles and shoutboxes.';
 
 $helptxt['sp_permissions'] = 'This option enables permissions to be used on blocks. The first three options are the simplest to use and understand.
 <ul>
@@ -143,6 +147,7 @@ $helptxt['sp_param_sp_boardNews_limit'] = 'The maximum number of news items to b
 $helptxt['sp_param_sp_boardNews_start'] = 'The ID of a particular post to start with (otherwise the first result will be used).';
 $helptxt['sp_param_sp_boardNews_length'] = 'If specified, posts exceeding this limit will be shortened and have an ellipsis (...), or a "Read More" link placed on the end.';
 $helptxt['sp_param_sp_boardNews_avatar'] = 'Enables avatars to be displayed for the member who posted the board news.';
+$helptxt['sp_param_sp_boardNews_attachment'] = 'Enables the first attachment to be displayed as a leading left floated image, giving a blog look to the block';
 $helptxt['sp_param_sp_boardNews_per_page'] = 'How many posts to display per page. Leave empty to disable pagination.';
 $helptxt['sp_param_sp_attachmentImage_limit'] = 'How many recently attached images to display.';
 $helptxt['sp_param_sp_attachmentImage_direction'] = 'Attachment images can be aligned horizontally or vertically.';
@@ -165,8 +170,10 @@ $helptxt['sp_param_sp_staff_lmod'] = 'Disables Local Moderators from being liste
 $helptxt['sp_param_sp_articles_category'] = 'The category to display articles from.';
 $helptxt['sp_param_sp_articles_limit'] = 'How many articles to display.';
 $helptxt['sp_param_sp_articles_type'] = 'Displays random articles, or the latest articles.';
-$helptxt['sp_param_sp_articles_length'] = 'If specified, articles exceeding this limit will be shortened and have an ellipsis (...) link placed on the end.';
+$helptxt['sp_param_sp_articles_view'] = 'Compact will display a simple list of article titles, linked to the article.  Full will display the article full text, or up to the limit characters';
+$helptxt['sp_param_sp_articles_length'] = 'If specified, full articles exceeding this limit will be shortened and have an ellipsis (...) link placed on the end.';
 $helptxt['sp_param_sp_articles_avatar'] = 'Enables the author avatar to be displayed along with the article.';
+$helptxt['sp_param_sp_articles_attachment'] = 'Enables the first article attachment to be displayed as a leading left floated image, giving a blog look to the article block.';
 $helptxt['sp_param_sp_gallery_limit'] = 'How many items to display.';
 $helptxt['sp_param_sp_gallery_type'] = 'Displays random or the latest gallery items.';
 $helptxt['sp_param_sp_gallery_direction'] = 'Gallery images can be aligned horizontally or vertically.';

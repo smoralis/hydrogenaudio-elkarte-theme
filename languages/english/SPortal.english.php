@@ -1,13 +1,12 @@
 <?php
 
 /**
- * @package SimplePortal
+ * @package SimplePortal ElkArte
  *
  * @author SimplePortal Team
- * @copyright 2014 SimplePortal Team
+ * @copyright 2015-2017 SimplePortal Team
  * @license BSD 3-clause
- *
- * @version 2.4.1
+ * @version 1.0.0 RC1
  */
 
 // General strings
@@ -27,21 +26,25 @@ $txt['sp-star'] = 'Star';
 $txt['sp_yes'] = 'Yes';
 $txt['sp_no'] = 'No';
 $txt['sp_submit'] = 'Submit';
+$txt['sp_add'] = 'Add';
+$txt['sp_items'] = 'Items';
 $txt['sp_modify'] = 'Modify';
 $txt['sp_move'] = 'Move';
 $txt['sp_likes_given'] = 'Given';
 $txt['sp_likes_received'] = 'Received';
 $txt['sp_all'] = 'All';
 $txt['sp_link'] = '[link]';
-$txt['sp_viewed_time'] = 'viewed %d time';
-$txt['sp_viewed_times'] = 'viewed %d times';
+$txt['sp_viewed_time'] = 'read %d time';
+$txt['sp_viewed_times'] = 'read %d times';
 $txt['sp_has_article'] = '%d article';
 $txt['sp_has_articles'] = '%d articles';
 $txt['sp_commented_on_time'] = 'commented on %d time';
 $txt['sp_commented_on_times'] = 'commented on %d times';
 $txt['sp_posted_on_by'] = 'posted on %1$s by %2$s';
+$txt['sp_posted_by'] = 'posted %1$s by %2$s';
 $txt['sp_posted_in_on_by'] = 'posted in %1$s on %2$s by %3$s';
 $txt['sp_posted_on_in_by'] = 'posted %2$s in %1$s by %3$s';
+$txt['sp_articles_in_category'] = 'Articles in Category "%s"';
 
 $txt['sp_read_more'] = 'Read More';
 $txt['sp_write_comment'] = 'Write Comment';
@@ -84,11 +87,6 @@ $txt['sp_shoutbox_prune'] = 'Prune';
 $txt['sp_shoutbox_show_ignored'] = 'show ignored shout';
 $txt['sp_topstats_unknown_type'] = 'Unknown or unsupported Top Stats Type.';
 $txt['sp_topstats_type_error'] = 'Incomplete Type Setup.';
-$txt['sp_sashop_no_exist'] = 'Sorry, we could not find the SA Shop Mod modification';
-$txt['sp_shop_no_exist'] = 'Sorry, we could not find the SMF Shop Mod modification';
-$txt['sp_eliana_no_exist'] = 'Sorry, we could not find the Automatic Karma system modification, it\'s either not installed or it\'s disabled';
-$txt['sp_thankomatic_no_exist'] = 'Sorry, we could not find the Thank-O-Matic modification.';
-$txt['sp_reputation_no_exist'] = 'Sorry, we could not find the Advanced Reputation modification, it\'s either not installed or it\'s disabled';
 $txt['sp_karma_is_disabled'] = 'Karma System is disabled';
 $txt['sp_likes_is_disabled'] = 'Likes System is disabled';
 $txt['sp_topStatsMember_total_time_logged_in'] = 'Total Time Logged In';
@@ -99,6 +97,16 @@ $txt['sp_topStatsMember_Karma_Total'] = 'Total Karma';
 $txt['sp_topStatsMember_Likes_Received'] = 'Likes Received';
 $txt['sp_topStatsMember_Likes_Given'] = 'Likes Given';
 $txt['sp_topStatsMember_Likes_Total'] = 'Likes Total';
+$txt['sp_admincount_approval'] = 'Requiring Approval';
+$txt['sp_admincount_attachments'] = 'Attachments';
+$txt['sp_admincount_emailmod'] = 'Email Postings';
+$txt['sp_admincount_topics'] = 'Topics';
+$txt['sp_admincount_posts'] = 'Posts';
+$txt['sp_admincount_groupreq'] = 'Group requests';
+$txt['sp_admincount_memberreq'] = 'Members';
+$txt['sp_admincount_reports'] = 'Reported posts';
+$txt['sp_admincount_errors'] = 'Error log entries';
+$txt['sp_admincount_awaiting_activation'] = 'Waiting activation';
 
 // Who area strings
 $txt['sp_who_index'] = 'Viewing the <a href="%s">Portal</a>.';
@@ -135,17 +143,22 @@ $txt['error_sp_no_items_day'] = 'No calendar events were found.';
 $txt['error_sp_no_blog_found'] = 'There are no blog mods installed.';
 $txt['error_sp_no_blogs_found'] = 'No blogs were found.';
 $txt['error_sp_no_articles_found'] = 'There are no articles to display.';
+$txt['error_sp_no_articles_attach_folder'] = 'The articles attachment folder is missing or not writable';
 $txt['error_sp_no_categories_found'] = 'There are no categories to display.';
-$txt['error_sp_no_shop_found'] = 'There are no shop mods installed.';
-$txt['error_sp_no_arcade_found'] = 'There are no arcade mods installed.';
 $txt['error_sp_no_stats_found'] = 'No statistics found.';
 $txt['error_sp_no_permission_profiles'] = 'There are no permission profiles available.';
+$txt['error_sp_no_style_profiles'] = 'There are no style profiles available.';
+$txt['error_sp_no_visibility_profiles'] = 'There are no visibility profiles available.';
 $txt['error_sp_no_pages'] = 'There are no pages available.';
 $txt['error_sp_no_categories'] = 'There are no categories available.';
 $txt['error_sp_no_articles'] = 'There are no articles available.';
-$txt['error_sp_no_comments'] = 'There are no comment made on this article yet. Be the first one to comment!';
+$txt['error_sp_no_comments'] = 'There are no comments on this article yet. Be the first one to comment!';
+$txt['error_sp_no_profiles'] = 'There are no profiles added yet!';
+$txt['error_sp_no_custom_menus'] = 'There are no custom menus added yet!';
+$txt['error_sp_no_menu_items'] = 'There are no menu items added yet!';
 $txt['error_sp_cannot_comment_modify'] = 'You don\'t have permission to modify this comment.';
 $txt['error_sp_cannot_comment_delete'] = 'You don\'t have permission to delete this comment.';
+$txt['error_sp_menu_not_found'] = 'The menu you requested cannot be found.';
 $txt['error_sp_page_not_found'] = 'The page you requested cannot be found.';
 $txt['error_sp_article_not_found'] = 'The article you requested cannot be found.';
 $txt['error_sp_category_not_found'] = 'The category you requested cannot be found.';
@@ -155,7 +168,6 @@ $txt['error_sp_no_shoutbox_sp_moderator'] = 'A new shoutbox can be created <a hr
 $txt['error_sp_no_shoutbox_normaluser'] = 'Sorry, shoutbox blocks require a shoutbox to be created before you can display a shoutbox using a shoutbox block ! Please ask an administrator to create a new shoutbox.';
 $txt['error_sp_cannot_shoutbox_moderate'] = 'You don\'t have permission to moderate this shoutbox.';
 $txt['error_sp_no_block'] = 'There aren\'t any blocks created yet.';
-$txt['error_sp_flood_spsbp'] = 'Your last shout was less than %1$d seconds ago. Please try again later.';
 $txt['error_sp_flood_spsbp'] = 'Your last shout was less than %1$d seconds ago. Please try again later.';
 $txt['error_sp_id_empty'] = 'Sorry, an invalid type was supplied.';
 

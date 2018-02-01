@@ -45,7 +45,7 @@ function template_main()
 			echo '
 						<tr>
 							<td>
-								<p class="topic_icons', isset($message_icon_sprite[$topic['first_post']['icon']]) ? ' topicicon img_' . $topic['first_post']['icon'] : '', '">';
+								<p class="topic_icons', isset($message_icon_sprite[$topic['first_post']['icon']]) ? ' topicicon i-' . $topic['first_post']['icon'] : '', '">';
 
 			if (!isset($message_icon_sprite[$topic['first_post']['icon']]))
 				echo '
@@ -58,7 +58,8 @@ function template_main()
 
 			// Any new replies?
 			if ($topic['new'])
-				echo '<a class="new_posts" href="', $topic['new_href'], '" id="newicon' . $topic['first_post']['id'] . '">' . $txt['new'] . '</a>&nbsp;';
+				echo '
+								<a class="new_posts" href="', $topic['new_href'], '" id="newicon' . $topic['first_post']['id'] . '">' . $txt['new'] . '</a>';
 
 			// Show the board the topic was posted in, as well as a link to the profile of the topic starter
 			echo
@@ -70,12 +71,11 @@ function template_main()
 							<td class="centertext">', $topic['replies'], '</td>
 							<td class="centertext">', $topic['views'], '</td>
 							<td>
-								<a href="', $topic['last_post']['href'], '">
-								<img class="floatright" src="', $settings['images_url'], '/icons/last_post.png" alt="', $txt['last_post'], '" title="', $txt['last_post'], '" /></a>
 								<span class="smalltext">
 									', $topic['last_post']['time'], '<br />
 									', $txt['by'], ' ', $topic['last_post']['member']['link'], '
 								</span>
+								<a class="topicicon i-last_post" href="', $topic['last_post']['href'], '" title="', $txt['last_post'], '"></a>
 							</td>
 							<td class="centertext">
 								<input type="checkbox" name="remove_bookmarks[]" value="', $topic['id'], '" class="input_check" />
@@ -96,6 +96,6 @@ function template_main()
 	else
 	{
 		echo '
-			<div class="description">', $txt['bookmark_list_empty'], '</div>';
+			<div class="infobox">', $txt['bookmark_list_empty'], '</div>';
 	}
 }
