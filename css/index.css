@@ -54,11 +54,11 @@
 .wrapper {
 	margin: 0 auto;
 	/* Next controls forum width, when it is not set in admin. */
-	width: 90%;
+	width: 100%;
 	/* Next limits maximum width on wide screens. */
 	/* Sized in em, since some people require larger text. */
 	/* For ease of reading, content really should not be too wide. */
-	max-width: 90em;
+	max-width: 100em;
 }
 
 /* -------------------------------------------------------
