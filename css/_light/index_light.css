@@ -215,12 +215,12 @@ strong {
  * Nicer than default. Needs two separate rules.
  */
 ::-moz-selection {
-	background: #2F3A40;
+	background: #DCDCDC;
 	color: #444444;
 }
 
 ::selection {
-	background: #2F3A40;
+	background: #DCDCDC;
 	color: #444444;
 }
 
