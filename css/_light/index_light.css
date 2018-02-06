@@ -1570,8 +1570,8 @@ li.ui-tab.ui-tabs-active.ui-state-active.ui-state-hover .ui-tabs-anchor {
 }
 
 .activity_stats li .bar div {
-	background: #60BC78;
-	background-image: linear-gradient(to bottom, #60BC78 0%, #5176B5 100%);
+	background: #FFFFFF;
+	background-image: linear-gradient(to bottom, #92A8CF 0%, #5176B5 100%);
 }
 
 .profile_pie {
