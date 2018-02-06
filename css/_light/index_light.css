@@ -68,7 +68,7 @@ html {
 body {
 	background: #585858;
 	background-image: linear-gradient(to right, #333333 0%, #888888 50%, #333333 100%);
-	color: #585858;
+	color: #000000;
 }
 
 fieldset {
