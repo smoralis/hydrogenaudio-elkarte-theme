@@ -216,12 +216,12 @@ strong {
  */
 ::-moz-selection {
 	background: #2F3A40;
-	color: #444444;
+	color: #FFFFFF;
 }
 
 ::selection {
 	background: #2F3A40;
-	color: #444444;
+	color: #FFFFFF;
 }
 
 /* Other highlighted text, such as search results. */
