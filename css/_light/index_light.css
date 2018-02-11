@@ -2141,6 +2141,11 @@ li.ui-tab.ui-tabs-active.ui-state-active.ui-state-hover .ui-tabs-anchor {
 		width: 1.75em;
 		height: 1.75em;
 	}
+	
+	.i-account::before {
+        	margin: -5px 0 0 -5px;
+		padding: 2px;
+	}
 }
 
 /* This one does up to 540 screens. */
