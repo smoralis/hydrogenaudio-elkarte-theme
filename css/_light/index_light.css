@@ -2087,6 +2087,60 @@ li.ui-tab.ui-tabs-active.ui-state-active.ui-state-hover .ui-tabs-anchor {
 	#main_menu .linklevel1.active, #main_menu .linklevel1.active:hover {
 		border: none;
 	}
+	/*HA Forum icon mobile*/
+	#button_forum .linklevel1:before {
+		display: inline-block;
+		margin: .05em;
+		padding: .35em;
+		border: .25em solid;
+		border-radius: .25em;
+		border-color: #585858;
+		vertical-align: middle;
+		width: 1.75em;
+		height: 1.75em;
+   	}
+	
+	/*HA Terms of Service icon mobile*/
+	#button_3b6c2b4caaf4f14f8d7feeddc4ac3f4d-1451354277 .linklevel1:before {
+		display: inline-block;
+		margin: .05em;
+		padding: .35em;
+		border: .25em solid;
+		border-radius: .25em;
+		border-color: #585858;
+		vertical-align: middle;
+		background-size: 90%;
+		width: 1.75em;
+		height: 1.75em;
+	}
+	
+	/*HA Wiki icon mobile*/
+	#button_3b6c2b4caaf4f14f8d7feeddc4ac3f4d-1451354277 .linklevel1:before {
+		display: inline-block;
+		margin: .05em;
+		padding: .35em;
+		border: .25em solid;
+		border-radius: .25em;
+		border-color: #585858;
+		vertical-align: middle;
+		background-size: 90%;
+		width: 1.75em;
+		height: 1.75em;
+	}
+		
+	/*HA foobar2000 forum icon mobile*/
+	#button_2cad931b9566e54811554d5f7fdc1e84-1451402398 .linklevel1:before {
+		display: inline-block;
+		margin: .05em;
+		padding: .35em;
+		border: .25em solid;
+		border-radius: .25em;
+		border-color: #585858;
+		vertical-align: middle;
+		background-size: 90%;
+		width: 1.75em;
+		height: 1.75em;
+	}
 }
 
 /* This one does up to 540 screens. */
