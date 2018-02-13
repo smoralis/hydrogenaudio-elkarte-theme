@@ -2166,6 +2166,18 @@ li.ui-tab.ui-tabs-active.ui-state-active.ui-state-hover .ui-tabs-anchor {
 	.whos_online dd:nth-child(even), .whos_online dd:nth-child(odd) {
 		border-top-color: #CCCCCC;
 	}
+	
+	#gotop{
+		display: inline;
+		left: -1.45em;
+		bottom: 1.75em
+	}
+	
+	#gobottom{
+		display: inline;
+		bottom: 0.25em;
+		border-radius: 0 0 0.5em 0;
+	}
 }
 
 @media screen and (max-width: 30em) {
