@@ -2084,9 +2084,6 @@ li.ui-tab.ui-tabs-active.ui-state-active.ui-state-hover .ui-tabs-anchor {
 		background: transparent;
 	}
 
-	#main_menu .linklevel1.active, #main_menu .linklevel1.active:hover {
-		border: none;
-	}
 	/*HA Forum icon mobile*/
 	#button_forum .linklevel1:before {
 		display: inline-block;
