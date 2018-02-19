@@ -421,7 +421,7 @@
 }
 
 /*HA Wiki icon desktop*/
-#button_bf111e3622a72a3b5dc784b5903983ca-1451354374 linklevel1:before {
+#button_bf111e3622a72a3b5dc784b5903983ca-1451354374 .linklevel1:before {
 	min-height: 22px;
         padding: 1px;
         padding-right: 41px;
@@ -435,7 +435,7 @@
 }
 
 /*HA Foobar2000 Forums icon desktop*/
-#button_2cad931b9566e54811554d5f7fdc1e84-1451402398 linklevel1:before {
+#button_2cad931b9566e54811554d5f7fdc1e84-1451402398 .linklevel1:before {
 	min-height: 22px;
         padding: 1px;
         padding-right: 41px;
