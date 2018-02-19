@@ -1008,6 +1008,10 @@ div.bbc_footnotes .meaction {
 
 }
 
+.board_row:nth-child(even), .childboard_row:nth-child(even){
+	background: #eff1f3;
+}
+
 .board_latest {
 	border-left-color: #CCCCCC;
 }
@@ -1077,6 +1081,10 @@ div.bbc_footnotes .meaction {
 .topic_listing > li {
 	border-color: #DDDDDD;
 	border-bottom-color: #CCCCCC;
+}
+
+.topic_listing > li:nth-child(even):not(.sticky_row) {
+	background: #F1F3F5;
 }
 
 .basic_row {
