@@ -2092,19 +2092,6 @@ li.ui-tab.ui-tabs-active.ui-state-active.ui-state-hover .ui-tabs-anchor {
 		background: transparent;
 	}
 
-	/*HA Forum icon mobile*/
-	#button_forum .linklevel1:before {
-		display: inline-block;
-		margin: .05em;
-		padding: .35em;
-		border: .25em solid;
-		border-radius: .25em;
-		border-color: #585858;
-		vertical-align: middle;
-		width: 1.75em;
-		height: 1.75em;
-   	}
-	
 	/*HA Terms of Service icon mobile*/
 	#button_3b6c2b4caaf4f14f8d7feeddc4ac3f4d-1451354277 .linklevel1:before {
 		display: inline-block;
